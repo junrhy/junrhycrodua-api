@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\AgentController;
 use App\Http\Controllers\AnimalController;
@@ -57,7 +58,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Route::middleware('auth:sanctum')->group(function () {
+// Public routes
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
+
+// Protected routes
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/user', function (Request $request) {
+        return $request->user();
+    });
+
+    Route::post('/logout', [AuthController::class, 'logout']);
+
     Route::apiResource('addresses', AddressController::class);
     Route::apiResource('agents', AgentController::class);
     Route::apiResource('animals', AnimalController::class);
@@ -100,4 +112,4 @@ use Illuminate\Support\Facades\Route;
     Route::apiResource('vehicles', VehicleController::class);
     Route::apiResource('vendors', VendorController::class);
     Route::apiResource('vouchers', VouchersController::class);
-//});
+});
