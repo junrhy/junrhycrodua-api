@@ -14,8 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('real_estates', function (Blueprint $table) {
-            $table->id();
-            $table->string('uuid')->unique();
+            $table->uuid('id')->primary()->unique()->default(DB::raw('(UUID())'));
             $table->string('name');
             $table->json('properties');
             $table->timestamps();
