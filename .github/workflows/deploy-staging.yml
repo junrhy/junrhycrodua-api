@@ -18,7 +18,7 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Login to digitalocean
-        run: doctl registry login --access-token=dop_v1_2d9dd6066f303af3d1bb8ba26ec557184a637c5b74773fd832d010924a5e56ea
+        run: doctl registry login --access-token=${{ secrets.PERSONAL_ACCESS_TOKEN }}
 
       - name: ssh to digitalocean droplet name "lemp-s-1vcpu-1gb-sgp1-01"
         run: doctl compute ssh lemp-s-1vcpu-1gb-sgp1-01
