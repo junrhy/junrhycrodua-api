@@ -17,8 +17,8 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
-      - name: Login to digitalocean
-        run: doctl registry login --access-token=${{ secrets.PERSONAL_ACCESS_TOKEN }}
+      #- name: Login to digitalocean
+      #  run: doctl registry login --access-token=${{ secrets.PERSONAL_ACCESS_TOKEN }}
 
       - name: ssh to digitalocean droplet name "lemp-s-1vcpu-1gb-sgp1-01"
         run: doctl compute ssh lemp-s-1vcpu-1gb-sgp1-01
