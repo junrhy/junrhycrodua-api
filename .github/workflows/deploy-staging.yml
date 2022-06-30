@@ -32,4 +32,5 @@ jobs:
       - name: Print hello world!
         run: |
           cd /var/www/html
-          echo 'Im here! Hello!' >> hello.txt
+          pwd
+      # echo 'Im here! Hello!' >> hello.txt
