@@ -33,4 +33,4 @@ jobs:
         run: |
           cd /var/www/html
           pwd
-      # echo 'Im here! Hello!' >> hello.txt
+          sudo echo 'Im here! Hello!' >> hello.txt
