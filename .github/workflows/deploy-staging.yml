@@ -22,6 +22,12 @@ jobs:
         with:
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
 
+      - name: Login to digitalocean
+        run: doctl registry login
+
+      - name: Check current account
+        run: whoami
+
       - name: ssh to digitalocean droplet name "lemp-s-1vcpu-1gb-sgp1-01"
         run: doctl compute ssh lemp-s-1vcpu-1gb-sgp1-01
 
