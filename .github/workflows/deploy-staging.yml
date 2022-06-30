@@ -28,9 +28,6 @@ jobs:
       - name: Check current account
         run: whoami
 
-      - name: ssh to digitalocean droplet name "lemp-s-1vcpu-1gb-sgp1-01"
-        run: doctl compute ssh lemp-s-1vcpu-1gb-sgp1-01
-
       # Runs a set of commands using the runners shell
       - name: Print hello world!
         run: |
