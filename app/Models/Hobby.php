@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Hobby extends Model
 {
     use HasFactory;
+
+    protected $keyType = 'string';
+    
+    protected $fillable = [
+
+    ];
 }

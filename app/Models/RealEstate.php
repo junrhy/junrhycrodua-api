@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class RealEstate extends Model
 {
     use HasFactory;
+
+    protected $keyType = 'string';
+    
+    protected $fillable = [
+
+    ];
 }

@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('contacts', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary()->unique()->default(DB::raw('(UUID())'));
             $table->json('details');
             $table->timestamps();
         });

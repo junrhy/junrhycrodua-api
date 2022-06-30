@@ -13,11 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('couriers', function (Blueprint $table) {
+        Schema::create('projects', function (Blueprint $table) {
             $table->uuid('id')->primary()->unique()->default(DB::raw('(UUID())'));
-            $table->string('name');
-            $table->string('type');
-            $table->json('properties');
+            $table->string('long_name');
+            $table->tinyText('short_name');
+            $table->json('properties')->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('couriers');
+        Schema::dropIfExists('projects');
     }
 };
