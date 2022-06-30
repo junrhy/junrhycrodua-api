@@ -33,4 +33,5 @@ jobs:
         run: |
           cd /var/www/html
           pwd
-          sudo echo 'Im here! Hello!' >> hello.txt
+          ls
+          mkdir –m777 hello
