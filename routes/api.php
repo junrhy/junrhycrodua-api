@@ -29,6 +29,7 @@ use App\Http\Controllers\PersonController;
 use App\Http\Controllers\PlanController;
 use App\Http\Controllers\PlantsController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\PromotionController;
 use App\Http\Controllers\ProvinceController;
 use App\Http\Controllers\RealEstateController;
@@ -98,6 +99,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('plans', PlanController::class);
     Route::apiResource('plants', PlantController::class);
     Route::apiResource('products', ProductController::class);
+    Route::apiResource('projects', ProjectController::class);
     Route::apiResource('promotions', PromotionController::class);
     Route::apiResource('provinces', ProvincesController::class);
     Route::apiResource('real_estates', RealEstateController::class);
