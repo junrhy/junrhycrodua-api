@@ -34,4 +34,4 @@ jobs:
           cd /var/www/html
           pwd
           ls
-          mkdir –m777 hello
+          sudo mkdir –m777 hello
