@@ -24,8 +24,8 @@ jobs:
 
       - name: Login to digitalocean
         run: |
-          doctl registry login
           doctl auth list
+          doctl registry login
 
       - name: Check current account
         run: whoami
