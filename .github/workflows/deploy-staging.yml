@@ -25,12 +25,11 @@ jobs:
       - name: Login to digitalocean
         run: doctl registry login
 
-      - name: Check current account
-        run: whoami
+      - name: List all droplets
+        run: doctl compute droplet list
 
       # Runs a set of commands using the runners shell
       - name: Print hello world!
         run: |
           cd /var/www/html
           ls
-          cat hello.txt
