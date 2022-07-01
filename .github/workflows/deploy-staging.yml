@@ -23,7 +23,9 @@ jobs:
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
 
       - name: Login to digitalocean
-        run: doctl registry login
+        run: |
+          doctl registry login
+          doctl auth list
 
       - name: Check current account
         run: whoami
