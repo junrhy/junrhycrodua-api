@@ -31,5 +31,6 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Print hello world!
         run: |
-          sudo su
-          whoami
+          cd /var/www/html
+          ls
+          cat hello.txt
