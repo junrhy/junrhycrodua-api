@@ -22,9 +22,6 @@ jobs:
         with:
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
 
-      - name: Check current registry
-        run: doctl auth list
-
       - name: Login to digitalocean
         run: doctl registry login
 
@@ -33,7 +30,7 @@ jobs:
 
       # Runs a set of commands using the runners shell
       - name: Print hello world!
+        uses: /var/www/html/junrhycrodua-api/
         run: |
-          cd /var/www/html/junrhycrodua-api/
           ls
           cat hello.txt
