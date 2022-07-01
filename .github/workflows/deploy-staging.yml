@@ -33,6 +33,3 @@ jobs:
         run: |
           sudo su
           whoami
-          cd /var/www/html/junrhycrodua-api/
-          ls
-          cat hello.txt
