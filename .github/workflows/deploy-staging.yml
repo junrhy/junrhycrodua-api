@@ -31,7 +31,6 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Print hello world!
         run: |
-          cd /var/www/html
-          pwd
+          cd /var/www/html/junrhycrodua-api/
           ls
-          sudo mkdir –m777 hello
+          cat hello.txt
