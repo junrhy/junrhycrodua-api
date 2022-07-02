@@ -35,13 +35,13 @@ jobs:
         uses: appleboy/ssh-action@v0.1.2
         with:
           host: 157.230.42.139
-          key: {{ secrets.MAC_MINI_PRIVATE_KEY }}
+          key: ${{ secrets.MAC_MINI_PRIVATE_KEY }}
           username: root
 
           script: |
             pwd
             ls
-          
+
         # run: |
         #   mkdir ~/.ssh && chmod 700 ~/.ssh
         #   echo "${{ secrets.MAC_MINI_PRIVATE_KEY }}" > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
