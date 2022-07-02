@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  deploy_to_digita_ocean:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -28,3 +28,4 @@ jobs:
             cd /var/www/html
             if [ -d "junrhycrodua-api" ]; then rm -Rf junrhycrodua-api; fi
             mkdir junrhycrodua-api && chmod 700 junrhycrodua-api
+            cp -r $GITHUB_WORKSPACE /var/www/html/junrhycrodua-api
