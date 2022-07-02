@@ -38,9 +38,9 @@ jobs:
           key: {{ secrets.MAC_MINI_PRIVATE_KEY }}
           username: root
 
-        script: |
-          pwd
-          ls
+          script: |
+            pwd
+            ls
           
         # run: |
         #   mkdir ~/.ssh && chmod 700 ~/.ssh
