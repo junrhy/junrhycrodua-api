@@ -34,11 +34,9 @@ jobs:
       - name: Print hello world!
         run: |
           mkdir ~/.ssh && chmod 700 ~/.ssh
-          echo "${{ secrets.MAC_MINI_PUBLIC_KEY }}" > ~/.ssh/id_rsa.pub
-          ls ~/.ssh
+          echo "${{ secrets.MAC_MINI_PUBLIC_KEY }}" > ~/.ssh/id_rsa.pub && chmod 600 ~/.ssh/id_rsa.pub
           echo "${{ secrets.MAC_MINI_KNOWN_HOSTS }}" > ~/.ssh/known_hosts
-          ls ~/.ssh
-          cat ~/.ssh/id_rsa.pub
-          cat ~/.ssh/known_hosts
-          cd $GITHUB_WORKSPACE
+          ssh root@157.230.42.139
+          pwd
+          cd /var/www/html
           ls
