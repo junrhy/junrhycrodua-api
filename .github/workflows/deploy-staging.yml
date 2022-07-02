@@ -39,7 +39,9 @@ jobs:
           username: root
 
           script: |
-            pwd
+            cd /var/www/html
+            ls
+            mkdir test
             ls
 
         # run: |
