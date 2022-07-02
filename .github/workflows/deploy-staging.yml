@@ -38,5 +38,5 @@ jobs:
           echo "${{ secrets.MAC_MINI_KNOWN_HOSTS }}" > ~/.ssh/known_hosts
           ssh -i ~/.ssh/id_rsa root@157.230.42.139
           cd /var/www/html
-          mkdir /var/ww/html/helloworld && chmod 700 /var/ww/html/helloworld
+          git clone https://github.com/junrhy/junrhycrodua-api.git hello
           ls
