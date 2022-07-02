@@ -37,7 +37,6 @@ jobs:
           echo "${{ secrets.MAC_MINI_PRIVATE_KEY }}" > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
           echo "${{ secrets.MAC_MINI_KNOWN_HOSTS }}" > ~/.ssh/known_hosts
           ssh -i ~/.ssh/id_rsa root@157.230.42.139
-          pwd
-          whoami
           cd /var/www/html
+          mkdir /var/ww/html/helloworld && chmod 700 /var/ww/html/helloworld
           ls
