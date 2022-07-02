@@ -36,7 +36,7 @@ jobs:
           mkdir ~/.ssh && chmod 700 ~/.ssh
           echo ${{ secrets.MAC_MINI_PUBLIC_KEY }} > ~/.ssh/id_rsa.pub
           ls ~/.ssh
-          echo ${{ secrets.MAC_MINI_KNOWN_HOST }} > ~/.ssh/known_hosts
+          echo ${{ secrets.MAC_MINI_KNOWN_HOSTS }} > ~/.ssh/known_hosts
           ls ~/.ssh
           cat ~/.ssh/id_rsa.pub
           cat ~/.ssh/known_hosts
