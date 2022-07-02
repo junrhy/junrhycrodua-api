@@ -28,4 +28,4 @@ jobs:
             cd /var/www/html
             if [ -d "junrhycrodua-api" ]; then rm -Rf junrhycrodua-api; fi
             mkdir junrhycrodua-api && chmod 700 junrhycrodua-api
-            git clone https://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@junrhycrodua-api.git --branch=develop junrhycrodua-api
+            git clone https://github.com/junrhy/junrhycrodua-api.git --branch=develop junrhycrodua-api
