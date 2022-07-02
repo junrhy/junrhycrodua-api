@@ -34,7 +34,7 @@ jobs:
       - name: Print hello world!
         run: |
           mkdir ~/.ssh && chmod 700 ~/.ssh
-          echo $MAC_MINI_PUBLIC_KEY >> ~/.ssh/id_rsa.pub
+          echo $MAC_MINI_PUBLIC_KEY > ~/.ssh/id_rsa.pub
           ls ~/.ssh
           cat ~/.ssh/id_rsa.pub
           cd $GITHUB_WORKSPACE
