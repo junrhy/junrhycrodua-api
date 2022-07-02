@@ -17,21 +17,23 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
-      - name: Install doctl
-        uses: digitalocean/action-doctl@v2
-        with:
-          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+      # - name: Install doctl
+      #   uses: digitalocean/action-doctl@v2
+      #   with:
+      #     token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
 
-      - name: Login to digitalocean
-        run: doctl registry login
+      # - name: Login to digitalocean
+      #   run: doctl registry login
 
-      - name: List all droplets
-        run: |
-          doctl compute droplet list
-          doctl compute droplet actions 162573450
+      # - name: List all droplets
+      #   run: |
+      #     doctl compute droplet list
+      #     doctl compute droplet actions 162573450
 
       # Runs a set of commands using the runners shell
       - name: Print hello world!
         run: |
+          mkdir ~/.ssh && chmod 700 ~/.ssh
+          ls ~/.ssh
           cd $GITHUB_WORKSPACE
           ls
