@@ -29,3 +29,9 @@ jobs:
             if [ -d "junrhycrodua-api" ]; then rm -Rf junrhycrodua-api; fi
             mkdir junrhycrodua-api && chmod 700 junrhycrodua-api
             git clone https://github.com/junrhy/junrhycrodua-api.git --branch=develop junrhycrodua-api
+            cd junrhycrodua-api
+            sudo chgrp -R www-data storage bootstrap/cache
+            sudo chmod -R ug+rwx storage bootstrap/cache
+            composer install
+            php artisan migrate:refresh --seed
+            cp .env.example .env
