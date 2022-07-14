@@ -33,5 +33,7 @@ jobs:
             sudo chgrp -R www-data storage bootstrap/cache
             sudo chmod -R ug+rwx storage bootstrap/cache
             composer install
-            php artisan migrate:refresh --seed
+            composer dump-autoload
             cp .env.example .env
+            php artisan key:generate
+            php artisan migrate:refresh --seed

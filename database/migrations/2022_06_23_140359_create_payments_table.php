@@ -17,9 +17,9 @@ return new class extends Migration
             $table->uuid('id')->primary()->unique()->default(DB::raw('(UUID())'));
             $table->json('item');
             $table->double('amount');
-            $table->integer('brand_id');
-            $table->integer('person_id');
-            $table->integer('card_id')->nullable();
+            $table->uuid('brand_id');
+            $table->uuid('person_id');
+            $table->uuid('card_id')->nullable();
             $table->timestamps();
         });
     }
