@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('inventories', function (Blueprint $table) {
             $table->uuid('id')->primary()->unique()->default(DB::raw('(UUID())'));
-            $table->integer('item_id');
+            $table->uuid('item_id');
             $table->string('operator');
             $table->timestamps();
         });

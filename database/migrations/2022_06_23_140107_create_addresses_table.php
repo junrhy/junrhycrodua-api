@@ -16,11 +16,11 @@ return new class extends Migration
         Schema::create('addresses', function (Blueprint $table) {
             $table->uuid('id')->primary()->unique()->default(DB::raw('(UUID())'));
             $table->string('street_name');
-            $table->integer('barangay_id')->nullable();
-            $table->integer('town_id');
-            $table->integer('province_id');
-            $table->integer('state_id');
-            $table->integer('country_id');
+            $table->uuid('barangay_id')->nullable();
+            $table->uuid('town_id');
+            $table->uuid('province_id');
+            $table->uuid('state_id');
+            $table->uuid('country_id');
             $table->timestamps();
         });
     }
