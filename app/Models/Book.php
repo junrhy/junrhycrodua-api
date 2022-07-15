@@ -12,6 +12,8 @@ class Book extends Model
     protected $keyType = 'string';
     
     protected $fillable = [
-
+        'long_name',
+        'short_name',
+        'properties'
     ];
 }
