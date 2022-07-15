@@ -6,19 +6,23 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class AuthController extends Controller
 {
     public function register(Request $request) {
         $fields = $request->validate([
             'name' => 'required|string',
-            'email' => 'required|string|unique:users,email',
+            'brand_id' => 'required|uuid',
+            'email' => 'unique:users,email,NULL,id,brand_id,'.$request->brand_id, // unique is brand_id + email_address
             'password' => 'required|string|confirmed',
             'access_type' => 'required|string',
         ]);
 
         $user = User::create([
             'name' => $fields['name'],
+            'brand_id' => $fields['brand_id'],
             'email' => $fields['email'],
             'password' => bcrypt($fields['password'])
         ]);
@@ -44,12 +48,13 @@ class AuthController extends Controller
 
     public function login(Request $request) {
         $fields = $request->validate([
+            'brand_id' => 'required|uuid',
             'email' => 'required|string',
             'password' => 'required|string'
         ]);
 
         // Check email
-        $user = User::where('email', $fields['email'])->first();
+        $user = User::where('brand_id', $fields['brand_id'])->where('email', $fields['email'])->first();
 
         // Check password
         if(!$user || !Hash::check($fields['password'], $user->password)) {
