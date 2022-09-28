@@ -16,7 +16,7 @@ return new class extends Migration
         DB::statement('SET SESSION sql_require_primary_key=0');
         Schema::create('payments', function (Blueprint $table) {
             $table->uuid('id')->primary()->unique()->default(DB::raw('(UUID())'));
-            $table->json('item');
+            $table->longText('item');
             $table->double('amount');
             $table->uuid('brand_id');
             $table->uuid('person_id');

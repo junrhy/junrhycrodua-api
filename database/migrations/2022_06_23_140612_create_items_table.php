@@ -17,7 +17,7 @@ return new class extends Migration
         Schema::create('items', function (Blueprint $table) {
             $table->uuid('id')->primary()->unique()->default(DB::raw('(UUID())'));
             $table->string('name');
-            $table->json('properties');
+            $table->longText('properties');
             $table->timestamps();
         });
     }
