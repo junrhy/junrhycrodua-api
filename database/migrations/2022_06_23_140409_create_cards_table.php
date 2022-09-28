@@ -17,7 +17,7 @@ return new class extends Migration
         Schema::create('cards', function (Blueprint $table) {
             $table->uuid('id')->primary()->unique()->default(DB::raw('(UUID())'));
             $table->string('card_number');
-            $table->json('properties')->nullable();
+            $table->longText('properties')->nullable();
             $table->timestamps();
         });
     }

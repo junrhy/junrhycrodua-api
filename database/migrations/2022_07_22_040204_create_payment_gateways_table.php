@@ -13,11 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        DB::statement('SET SESSION sql_require_primary_key=0');
-        Schema::create('animals', function (Blueprint $table) {
+        Schema::create('payment_gateways', function (Blueprint $table) {
             $table->uuid('id')->primary()->unique()->default(DB::raw('(UUID())'));
             $table->string('name');
-            $table->longText('properties');
+            $table->string('type');
+            $table->longText('request_details');
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('animals');
+        Schema::dropIfExists('payment_gateways');
     }
 };
