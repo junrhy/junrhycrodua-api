@@ -37,10 +37,10 @@ class FamilyController extends Controller
         return $this->viewData($family);
     }
 
-    public function destroy(Request $request, $id)
+    public function destroy($id)
     {
-        $family = Family::findOrFail($id);
-        $family->delete();
+        $ids = explode(",",$id);
+        Family::whereIn('id', $ids)->delete();
 
         return 204;
     }

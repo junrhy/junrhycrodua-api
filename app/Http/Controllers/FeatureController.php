@@ -37,10 +37,10 @@ class FeatureController extends Controller
         return $this->viewData($feature);
     }
 
-    public function destroy(Request $request, $id)
+    public function destroy($id)
     {
-        $feature = Feature::findOrFail($id);
-        $feature->delete();
+        $ids = explode(",",$id);
+        Feature::whereIn('id', $ids)->delete();
 
         return 204;
     }

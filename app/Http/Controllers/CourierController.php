@@ -37,10 +37,10 @@ class CourierController extends Controller
         return $this->viewData($courier);
     }
 
-    public function destroy(Request $request, $id)
+    public function destroy($id)
     {
-        $courier = Courier::findOrFail($id);
-        $courier->delete();
+        $ids = explode(",",$id);
+        Courier::whereIn('id', $ids)->delete();
 
         return 204;
     }

@@ -37,10 +37,10 @@ class PlanController extends Controller
         return $this->viewData($plan);
     }
 
-    public function destroy(Request $request, $id)
+    public function destroy($id)
     {
-        $plan = Plan::findOrFail($id);
-        $plan->delete();
+        $ids = explode(",",$id);
+        Plan::whereIn('id', $ids)->delete();
 
         return 204;
     }

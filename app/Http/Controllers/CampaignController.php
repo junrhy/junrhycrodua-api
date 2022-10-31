@@ -37,10 +37,10 @@ class CampaignController extends Controller
         return $this->viewData($campaign);
     }
 
-    public function destroy(Request $request, $id)
+    public function destroy($id)
     {
-        $campaign = Campaign::findOrFail($id);
-        $campaign->delete();
+        $ids = explode(",",$id);
+        Campaign::whereIn('id', $ids)->delete();
 
         return 204;
     }

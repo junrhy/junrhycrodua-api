@@ -37,10 +37,10 @@ class AddressController extends Controller
         return $this->viewData($address);
     }
 
-    public function destroy(Request $request, $id)
+    public function destroy($id)
     {
-        $address = Address::findOrFail($id);
-        $address->delete();
+        $ids = explode(",",$id);
+        Address::whereIn('id', $ids)->delete();
 
         return 204;
     }

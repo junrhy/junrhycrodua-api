@@ -37,10 +37,10 @@ class PlantController extends Controller
         return $this->viewData($plant);
     }
 
-    public function destroy(Request $request, $id)
+    public function destroy($id)
     {
-        $plant = Plant::findOrFail($id);
-        $plant->delete();
+        $ids = explode(",",$id);
+        Plant::whereIn('id', $ids)->delete();
 
         return 204;
     }

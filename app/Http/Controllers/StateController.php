@@ -37,10 +37,10 @@ class StateController extends Controller
         return $this->viewData($state);
     }
 
-    public function destroy(Request $request, $id)
+    public function destroy($id)
     {
-        $state = State::findOrFail($id);
-        $state->delete();
+        $ids = explode(",",$id);
+        State::whereIn('id', $ids)->delete();
 
         return 204;
     }

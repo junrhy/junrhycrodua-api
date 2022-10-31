@@ -37,10 +37,10 @@ class StatusController extends Controller
         return $this->viewData($status);
     }
 
-    public function destroy(Request $request, $id)
+    public function destroy($id)
     {
-        $status = Status::findOrFail($id);
-        $status->delete();
+        $ids = explode(",",$id);
+        Status::whereIn('id', $ids)->delete();
 
         return 204;
     }

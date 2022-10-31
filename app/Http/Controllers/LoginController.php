@@ -37,10 +37,10 @@ class LoginController extends Controller
         return $this->viewData($login);
     }
 
-    public function destroy(Request $request, $id)
+    public function destroy($id)
     {
-        $login = Login::findOrFail($id);
-        $login->delete();
+        $ids = explode(",",$id);
+        Login::whereIn('id', $ids)->delete();
 
         return 204;
     }

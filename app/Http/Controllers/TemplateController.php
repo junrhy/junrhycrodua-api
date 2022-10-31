@@ -37,10 +37,10 @@ class TemplateController extends Controller
         return $this->viewData($template);
     }
 
-    public function destroy(Request $request, $id)
+    public function destroy($id)
     {
-        $template = Template::findOrFail($id);
-        $template->delete();
+        $ids = explode(",",$id);
+        Template::whereIn('id', $ids)->delete();
 
         return 204;
     }

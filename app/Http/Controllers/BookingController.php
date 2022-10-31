@@ -37,10 +37,10 @@ class BookingController extends Controller
         return $this->viewData($booking);
     }
 
-    public function destroy(Request $request, $id)
+    public function destroy($id)
     {
-        $booking = Booking::findOrFail($id);
-        $booking->delete();
+        $ids = explode(",",$id);
+        Booking::whereIn('id', $ids)->delete();
 
         return 204;
     }

@@ -37,10 +37,10 @@ class ProductController extends Controller
         return $this->viewData($product);
     }
 
-    public function destroy(Request $request, $id)
+    public function destroy($id)
     {
-        $product = Product::findOrFail($id);
-        $product->delete();
+        $ids = explode(",",$id);
+        Product::whereIn('id', $ids)->delete();
 
         return 204;
     }

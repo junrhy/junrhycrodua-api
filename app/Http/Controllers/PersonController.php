@@ -37,10 +37,10 @@ class PersonController extends Controller
         return $this->viewData($person);
     }
 
-    public function destroy(Request $request, $id)
+    public function destroy($id)
     {
-        $person = Person::findOrFail($id);
-        $person->delete();
+        $ids = explode(",",$id);
+        Person::whereIn('id', $ids)->delete();
 
         return 204;
     }

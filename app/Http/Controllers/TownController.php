@@ -37,10 +37,10 @@ class TownController extends Controller
         return $this->viewData($town);
     }
 
-    public function destroy(Request $request, $id)
+    public function destroy($id)
     {
-        $town = Town::findOrFail($id);
-        $town->delete();
+        $ids = explode(",",$id);
+        Town::whereIn('id', $ids)->delete();
 
         return 204;
     }

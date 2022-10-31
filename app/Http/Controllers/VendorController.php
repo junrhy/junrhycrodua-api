@@ -37,10 +37,10 @@ class VendorController extends Controller
         return $this->viewData($vendor);
     }
 
-    public function destroy(Request $request, $id)
+    public function destroy($id)
     {
-        $vendor = Vendor::findOrFail($id);
-        $vendor->delete();
+        $ids = explode(",",$id);
+        Vendor::whereIn('id', $ids)->delete();
 
         return 204;
     }

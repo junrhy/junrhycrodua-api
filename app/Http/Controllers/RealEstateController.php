@@ -37,10 +37,10 @@ class RealEstateController extends Controller
         return $this->viewData($realEstate);
     }
 
-    public function destroy(Request $request, $id)
+    public function destroy($id)
     {
-        $realEstate = RealEstate::findOrFail($id);
-        $realEstate->delete();
+        $ids = explode(",",$id);
+        RealEstate::whereIn('id', $ids)->delete();
 
         return 204;
     }

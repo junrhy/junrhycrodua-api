@@ -37,10 +37,10 @@ class PromotionController extends Controller
         return $this->viewData($promotion);
     }
 
-    public function destroy(Request $request, $id)
+    public function destroy($id)
     {
-        $promotion = Promotion::findOrFail($id);
-        $promotion->delete();
+        $ids = explode(",",$id);
+        Promotion::whereIn('id', $ids)->delete();
 
         return 204;
     }

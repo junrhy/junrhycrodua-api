@@ -37,10 +37,10 @@ class SubscriptionController extends Controller
         return $this->viewData($subscription);
     }
 
-    public function destroy(Request $request, $id)
+    public function destroy($id)
     {
-        $subscription = Subscription::findOrFail($id);
-        $subscription->delete();
+        $ids = explode(",",$id);
+        Subscription::whereIn('id', $ids)->delete();
 
         return 204;
     }

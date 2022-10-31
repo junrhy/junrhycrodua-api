@@ -37,10 +37,10 @@ class ProjectController extends Controller
         return $this->viewData($project);
     }
 
-    public function destroy(Request $request, $id)
+    public function destroy($id)
     {
-        $project = Project::findOrFail($id);
-        $project->delete();
+        $ids = explode(",",$id);
+        Project::whereIn('id', $ids)->delete();
 
         return 204;
     }
