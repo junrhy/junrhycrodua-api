@@ -37,10 +37,10 @@ class CountryController extends Controller
         return $this->viewData($country);
     }
 
-    public function destroy(Request $request, $id)
+    public function destroy($id)
     {
-        $country = Country::findOrFail($id);
-        $country->delete();
+        $ids = explode(",",$id);
+        Country::whereIn('id', $ids)->delete();
 
         return 204;
     }

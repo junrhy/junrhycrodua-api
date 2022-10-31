@@ -37,10 +37,10 @@ class LogisticController extends Controller
         return $this->viewData($logistic);
     }
 
-    public function destroy(Request $request, $id)
+    public function destroy($id)
     {
-        $logistic = Logistic::findOrFail($id);
-        $logistic->delete();
+        $ids = explode(",",$id);
+        Logistic::whereIn('id', $ids)->delete();
 
         return 204;
     }

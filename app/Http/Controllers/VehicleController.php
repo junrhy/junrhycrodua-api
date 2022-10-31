@@ -37,10 +37,10 @@ class VehicleController extends Controller
         return $this->viewData($vehicle);
     }
 
-    public function destroy(Request $request, $id)
+    public function destroy($id)
     {
-        $vehicle = Vehicle::findOrFail($id);
-        $vehicle->delete();
+        $ids = explode(",",$id);
+        Vehicle::whereIn('id', $ids)->delete();
 
         return 204;
     }

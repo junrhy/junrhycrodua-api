@@ -37,10 +37,10 @@ class FileController extends Controller
         return $this->viewData($file);
     }
 
-    public function destroy(Request $request, $id)
+    public function destroy($id)
     {
-        $file = File::findOrFail($id);
-        $file->delete();
+        $ids = explode(",",$id);
+        File::whereIn('id', $ids)->delete();
 
         return 204;
     }

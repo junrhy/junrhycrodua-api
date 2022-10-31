@@ -37,10 +37,10 @@ class CardController extends Controller
         return $this->viewData($card);
     }
 
-    public function destroy(Request $request, $id)
+    public function destroy($id)
     {
-        $card = Card::findOrFail($id);
-        $card->delete();
+        $ids = explode(",",$id);
+        Card::whereIn('id', $ids)->delete();
 
         return 204;
     }

@@ -37,10 +37,10 @@ class MessageController extends Controller
         return $this->viewData($message);
     }
 
-    public function destroy(Request $request, $id)
+    public function destroy($id)
     {
-        $message = Message::findOrFail($id);
-        $message->delete();
+        $ids = explode(",",$id);
+        Message::whereIn('id', $ids)->delete();
 
         return 204;
     }

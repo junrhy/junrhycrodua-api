@@ -37,10 +37,10 @@ class BarangayController extends Controller
         return $this->viewData($barangay);
     }
 
-    public function destroy(Request $request, $id)
+    public function destroy($id)
     {
-        $barangay = Barangay::findOrFail($id);
-        $barangay->delete();
+        $ids = explode(",",$id);
+        Barangay::whereIn('id', $ids)->delete();
 
         return 204;
     }

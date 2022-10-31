@@ -37,10 +37,10 @@ class AgentController extends Controller
         return $this->viewData($agent);
     }
 
-    public function destroy(Request $request, $id)
+    public function destroy($id)
     {
-        $agent = Agent::findOrFail($id);
-        $agent->delete();
+        $ids = explode(",",$id);
+        Agent::whereIn('id', $ids)->delete();
 
         return 204;
     }

@@ -37,10 +37,10 @@ class BookController extends Controller
         return $this->viewData($book);
     }
 
-    public function destroy(Request $request, $id)
+    public function destroy($id)
     {
-        $book = Book::findOrFail($id);
-        $book->delete();
+        $ids = explode(",",$id);
+        Book::whereIn('id', $ids)->delete();
 
         return 204;
     }

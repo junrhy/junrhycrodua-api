@@ -37,10 +37,10 @@ class ProvinceController extends Controller
         return $this->viewData($province);
     }
 
-    public function destroy(Request $request, $id)
+    public function destroy($id)
     {
-        $province = Province::findOrFail($id);
-        $province->delete();
+        $ids = explode(",",$id);
+        Province::whereIn('id', $ids)->delete();
 
         return 204;
     }

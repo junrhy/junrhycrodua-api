@@ -37,10 +37,10 @@ class VoucherController extends Controller
         return $this->viewData($voucher);
     }
 
-    public function destroy(Request $request, $id)
+    public function destroy($id)
     {
-        $voucher = Voucher::findOrFail($id);
-        $voucher->delete();
+        $ids = explode(",",$id);
+        Voucher::whereIn('id', $ids)->delete();
 
         return 204;
     }

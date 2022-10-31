@@ -37,10 +37,10 @@ class PaymentController extends Controller
         return $this->viewData($payment);
     }
 
-    public function destroy(Request $request, $id)
+    public function destroy($id)
     {
-        $payment = Payment::findOrFail($id);
-        $payment->delete();
+        $ids = explode(",",$id);
+        Payment::whereIn('id', $ids)->delete();
 
         return 204;
     }

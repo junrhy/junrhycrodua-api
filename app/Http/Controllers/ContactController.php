@@ -37,10 +37,10 @@ class ContactController extends Controller
         return $this->viewData($contact);
     }
 
-    public function destroy(Request $request, $id)
+    public function destroy($id)
     {
-        $contact = Contact::findOrFail($id);
-        $contact->delete();
+        $ids = explode(",",$id);
+        Contact::whereIn('id', $ids)->delete();
 
         return 204;
     }

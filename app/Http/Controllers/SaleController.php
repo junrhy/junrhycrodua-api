@@ -37,10 +37,10 @@ class SaleController extends Controller
         return $this->viewData($sale);
     }
 
-    public function destroy(Request $request, $id)
+    public function destroy($id)
     {
-        $sale = Sale::findOrFail($id);
-        $sale->delete();
+        $ids = explode(",",$id);
+        Sale::whereIn('id', $ids)->delete();
 
         return 204;
     }

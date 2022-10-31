@@ -37,10 +37,10 @@ class ScheduleController extends Controller
         return $this->viewData($schedule);
     }
 
-    public function destroy(Request $request, $id)
+    public function destroy($id)
     {
-        $schedule = Schedule::findOrFail($id);
-        $schedule->delete();
+        $ids = explode(",",$id);
+        Schedule::whereIn('id', $ids)->delete();
 
         return 204;
     }

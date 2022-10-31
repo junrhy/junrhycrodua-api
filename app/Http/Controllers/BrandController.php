@@ -37,10 +37,10 @@ class BrandController extends Controller
         return $this->viewData($brand);
     }
 
-    public function destroy(Request $request, $id)
+    public function destroy($id)
     {
-        $brand = Brand::findOrFail($id);
-        $brand->delete();
+        $ids = explode(",",$id);
+        Brand::whereIn('id', $ids)->delete();
 
         return 204;
     }

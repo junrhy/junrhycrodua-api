@@ -37,10 +37,10 @@ class LeadController extends Controller
         return $this->viewData($lead);
     }
 
-    public function destroy(Request $request, $id)
+    public function destroy($id)
     {
-        $lead = Lead::findOrFail($id);
-        $lead->delete();
+        $ids = explode(",",$id);
+        Lead::whereIn('id', $ids)->delete();
 
         return 204;
     }

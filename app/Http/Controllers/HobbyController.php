@@ -37,10 +37,10 @@ class HobbyController extends Controller
         return $this->viewData($hobby);
     }
 
-    public function destroy(Request $request, $id)
+    public function destroy($id)
     {
-        $hobby = Hobby::findOrFail($id);
-        $hobby->delete();
+        $ids = explode(",",$id);
+        Hobby::whereIn('id', $ids)->delete();
 
         return 204;
     }

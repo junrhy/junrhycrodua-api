@@ -37,10 +37,10 @@ class InventoryController extends Controller
         return $this->viewData($inventory);
     }
 
-    public function destroy(Request $request, $id)
+    public function destroy($id)
     {
-        $inventory = Inventory::findOrFail($id);
-        $inventory->delete();
+        $ids = explode(",",$id);
+        Inventory::whereIn('id', $ids)->delete();
 
         return 204;
     }

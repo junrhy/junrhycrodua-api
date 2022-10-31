@@ -37,10 +37,10 @@ class ItemController extends Controller
         return $this->viewData($item);
     }
 
-    public function destroy(Request $request, $id)
+    public function destroy($id)
     {
-        $item = Item::findOrFail($id);
-        $item->delete();
+        $ids = explode(",",$id);
+        Item::whereIn('id', $ids)->delete();
 
         return 204;
     }

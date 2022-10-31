@@ -37,10 +37,10 @@ class CategoryController extends Controller
         return $this->viewData($category);
     }
 
-    public function destroy(Request $request, $id)
+    public function destroy($id)
     {
-        $category = Category::findOrFail($id);
-        $category->delete();
+        $ids = explode(",",$id);
+        Category::whereIn('id', $ids)->delete();
 
         return 204;
     }

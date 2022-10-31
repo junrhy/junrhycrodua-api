@@ -37,10 +37,10 @@ class TaxController extends Controller
         return $this->viewData($tax);
     }
 
-    public function destroy(Request $request, $id)
+    public function destroy($id)
     {
-        $tax = Tax::findOrFail($id);
-        $tax->delete();
+        $ids = explode(",",$id);
+        Tax::whereIn('id', $ids)->delete();
 
         return 204;
     }

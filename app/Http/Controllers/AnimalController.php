@@ -37,10 +37,10 @@ class AnimalController extends Controller
         return $this->viewData($animal);
     }
 
-    public function destroy(Request $request, $id)
+    public function destroy($id)
     {
-        $animal = Animal::findOrFail($id);
-        $animal->delete();
+        $ids = explode(",",$id);
+        Animal::whereIn('id', $ids)->delete();
 
         return 204;
     }
