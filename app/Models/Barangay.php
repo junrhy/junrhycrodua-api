@@ -12,6 +12,11 @@ class Barangay extends Model
     protected $keyType = 'string';
     
     protected $fillable = [
-
+        'name',
+        'official_id',
+        'brgy_code',
+        'region_code',
+        'province_code',
+        'municipal_code'
     ];
 }

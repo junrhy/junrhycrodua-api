@@ -13,7 +13,6 @@ class Country extends Model
     
     protected $fillable = [
         'long_name',
-        'short_name',
-        'properties'
+        'short_name'
     ];
 }

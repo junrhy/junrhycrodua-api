@@ -12,8 +12,7 @@ class Animal extends Model
     protected $keyType = 'string';
     
     protected $fillable = [
-        'long_name',
-        'short_name',
+        'name',
         'properties'
     ];
 }

@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('file_type');
             $table->string('file_size');
             $table->string('path');
-            $table->longText('properties');
+            $table->longText('properties')->nullable();
             $table->timestamps();
         });
     }

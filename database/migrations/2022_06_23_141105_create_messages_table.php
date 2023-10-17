@@ -18,7 +18,7 @@ return new class extends Migration
             $table->uuid('id')->primary()->unique()->default(DB::raw('(UUID())'));
             $table->uuid('sender_person_id');
             $table->uuid('receiver_person_id');
-            $table->longText('properties');
+            $table->longText('properties')->nullable();
             $table->timestamps();
         });
     }
