@@ -1,0 +1,100 @@
+[
+  { "long_name": "Metro Manila", "region": "NCR", "short_name": "MM" },
+
+  { "long_name": "Abra", "region": "CAR", "short_name": "ABR" },
+  { "long_name": "Apayao", "region": "CAR", "short_name": "APA" },
+  { "long_name": "Benguet", "region": "CAR", "short_name": "BEN" },
+  { "long_name": "Ifugao", "region": "CAR", "short_name": "IFU" },
+  { "long_name": "Kalinga", "region": "CAR", "short_name": "KAL" },
+  { "long_name": "Mountain Province", "region": "CAR", "short_name": "MOU" },
+
+  { "long_name": "Ilocos Norte", "region": "I", "short_name": "ILN" },
+  { "long_name": "Ilocos Sur", "region": "I", "short_name": "ILS" },
+  { "long_name": "La Union", "region": "I", "short_name": "LUN" },
+  { "long_name": "Pangasinan", "region": "I", "short_name": "PAN" },
+
+  { "long_name": "Batanes", "region": "II", "short_name": "BTN" },
+  { "long_name": "Cagayan", "region": "II", "short_name": "CAG" },
+  { "long_name": "Isabela", "region": "II", "short_name": "ISA" },
+  { "long_name": "Nueva Vizcaya", "region": "II", "short_name": "NUV" },
+  { "long_name": "Quirino", "region": "II", "short_name": "QUI" },
+
+  { "long_name": "Aurora", "region": "III", "short_name": "AUR" },
+  { "long_name": "Bataan", "region": "III", "short_name": "BAN" },
+  { "long_name": "Bulacan", "region": "III", "short_name": "BUL" },
+  { "long_name": "Nueva Ecija", "region": "III", "short_name": "NUE" },
+  { "long_name": "Pampanga", "region": "III", "short_name": "PAM" },
+  { "long_name": "Tarlac", "region": "III", "short_name": "TAR" },
+  { "long_name": "Zambales", "region": "III", "short_name": "ZMB" },
+
+  { "long_name": "Batangas", "region": "IV-A", "short_name": "BTG" },
+  { "long_name": "Cavite", "region": "IV-A", "short_name": "CAV" },
+  { "long_name": "Laguna", "region": "IV-A", "short_name": "LAG" },
+  { "long_name": "Quezon", "region": "IV-A", "short_name": "QUE" },
+  { "long_name": "Rizal", "region": "IV-A", "short_name": "RIZ" },
+
+  { "long_name": "Marinduque", "region": "IV-B", "short_name": "MAD" },
+  { "long_name": "Occidental Mindoro", "region": "IV-B", "short_name": "MDC" },
+  { "long_name": "Oriental Mindoro", "region": "IV-B", "short_name": "MDR" },
+  { "long_name": "Palawan", "region": "IV-B", "short_name": "PLW" },
+  { "long_name": "Romblon", "region": "IV-B", "short_name": "ROM" },
+
+  { "long_name": "Albay", "region": "V", "short_name": "ALB" },
+  { "long_name": "Camarines Norte", "region": "V", "short_name": "CAN" },
+  { "long_name": "Camarines Sur", "region": "V", "short_name": "CAS" },
+  { "long_name": "Catanduanes", "region": "V", "short_name": "CAT" },
+  { "long_name": "Masbate", "region": "V", "short_name": "MAS" },
+  { "long_name": "Sorsogon", "region": "V", "short_name": "SOR" },
+
+  { "long_name": "Aklan", "region": "VI", "short_name": "AKL" },
+  { "long_name": "Antique", "region": "VI", "short_name": "ANT" },
+  { "long_name": "Capiz", "region": "VI", "short_name": "CAP" },
+  { "long_name": "Guimaras", "region": "VI", "short_name": "GUI" },
+  { "long_name": "Iloilo", "region": "VI", "short_name": "ILI" },
+  { "long_name": "Negros Occidental", "region": "VI", "short_name": "NEC" },
+
+  { "long_name": "Bohol", "region": "VII", "short_name": "BOH" },
+  { "long_name": "Cebu", "region": "VII", "short_name": "CEB" },
+  { "long_name": "Negros Oriental", "region": "VII", "short_name": "NER" },
+  { "long_name": "Siquijor", "region": "VII", "short_name": "SIG" },
+
+  { "long_name": "Biliran", "region": "VIII", "short_name": "BIL" },
+  { "long_name": "Eastern Samar", "region": "VIII", "short_name": "EAS" },
+  { "long_name": "Leyte", "region": "VIII", "short_name": "LEY" },
+  { "long_name": "Northern Samar", "region": "VIII", "short_name": "NSA" },
+  { "long_name": "Samar", "region": "VIII", "short_name": "WSA" },
+  { "long_name": "Southern Leyte", "region": "VIII", "short_name": "SLE" },
+
+  { "long_name": "Zamboanga del Norte", "region": "IX", "short_name": "ZAN" },
+  { "long_name": "Zamboanga del Sur", "region": "IX", "short_name": "ZAS" },
+  { "long_name": "Zamboanga Sibugay", "region": "IX", "short_name": "ZSI" },
+
+  { "long_name": "Bukidnon", "region": "X", "short_name": "BUK" },
+  { "long_name": "Camiguin", "region": "X", "short_name": "CAM" },
+  { "long_name": "Lanao del Norte", "region": "X", "short_name": "LAN" },
+  { "long_name": "Misamis Occidental", "region": "X", "short_name": "MSC" },
+  { "long_name": "Misamis Oriental", "region": "X", "short_name": "MSR" },
+
+  { "long_name": "Compostela Valley", "region": "XI", "short_name": "COM" },
+  { "long_name": "Davao del Norte", "region": "XI", "short_name": "DAV" },
+  { "long_name": "Davao del Sur", "region": "XI", "short_name": "DAS" },
+  { "long_name": "Davao Occidental", "region": "XI", "short_name": "DAC" },
+  { "long_name": "Davao Oriental", "region": "XI", "short_name": "DAO" },
+
+  { "long_name": "Cotabato", "region": "XII", "short_name": "NCO" },
+  { "long_name": "Sarangani", "region": "XII", "short_name": "SAR" },
+  { "long_name": "South Cotabato", "region": "XII", "short_name": "SCO" },
+  { "long_name": "Sultan Kudarat", "region": "XII", "short_name": "SUK" },
+
+  { "long_name": "Agusan del Norte", "region": "XIII", "short_name": "AGN" },
+  { "long_name": "Agusan del Sur", "region": "XIII", "short_name": "AGS" },
+  { "long_name": "Dinagat Islands", "region": "XIII", "short_name": "DIN" },
+  { "long_name": "Surigao del Norte", "region": "XIII", "short_name": "SUN" },
+  { "long_name": "Surigao del Sur", "region": "XIII", "short_name": "SUR" },
+
+  { "long_name": "Basilan", "region": "ARMM", "short_name": "BAS" },
+  { "long_name": "Lanao del Sur", "region": "ARMM", "short_name": "LAS" },
+  { "long_name": "Maguindanao", "region": "ARMM", "short_name": "MAG" },
+  { "long_name": "Sulu", "region": "ARMM", "short_name": "SLU" },
+  { "long_name": "Tawi-tawi", "region": "ARMM", "short_name": "TAW" }
+]

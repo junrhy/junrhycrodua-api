@@ -17,7 +17,7 @@ return new class extends Migration
         Schema::create('schedules', function (Blueprint $table) {
             $table->uuid('id')->primary()->unique()->default(DB::raw('(UUID())'));
             $table->datetime('date_time');
-            $table->longText('properties');
+            $table->longText('properties')->nullable();
             $table->timestamps();
         });
     }

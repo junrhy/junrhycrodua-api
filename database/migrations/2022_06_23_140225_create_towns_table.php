@@ -18,7 +18,7 @@ return new class extends Migration
             $table->uuid('id')->primary()->unique()->default(DB::raw('(UUID())'));
             $table->string('long_name');
             $table->tinyText('short_name');
-            $table->tinyText('postal_number');
+            $table->tinyText('properties');
             $table->timestamps();
         });
     }

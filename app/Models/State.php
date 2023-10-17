@@ -12,8 +12,8 @@ class State extends Model
     protected $keyType = 'string';
     
     protected $fillable = [
+        'country_code',
         'long_name',
-        'short_name',
-        'properties'
+        'short_name'
     ];
 }

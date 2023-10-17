@@ -18,7 +18,7 @@ return new class extends Migration
             $table->uuid('id')->primary()->unique()->default(DB::raw('(UUID())'));
             $table->string('name');
             $table->string('type');
-            $table->longText('properties');
+            $table->longText('properties')->nullable();
             $table->timestamps();
         });
     }
