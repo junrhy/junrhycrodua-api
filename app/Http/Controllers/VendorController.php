@@ -10,7 +10,7 @@ class VendorController extends Controller
 {
     public function index()
     {
-        $vendors = Vendor::all();
+        $vendors = Vendor::paginate(10);
 
         return $this->viewData($vendors);
     }

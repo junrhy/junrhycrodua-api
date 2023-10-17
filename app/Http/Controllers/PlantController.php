@@ -10,7 +10,7 @@ class PlantController extends Controller
 {
     public function index()
     {
-        $plants = Plant::all();
+        $plants = Plant::paginate(10);
 
         return $this->viewData($plants);
     }

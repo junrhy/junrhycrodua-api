@@ -10,7 +10,7 @@ class PlanController extends Controller
 {
     public function index()
     {
-        $plans = Plan::all();
+        $plans = Plan::paginate(10);
 
         return $this->viewData($plans);
     }

@@ -10,7 +10,7 @@ class AddressController extends Controller
 {
     public function index()
     {
-        $addresses = Address::all();
+        $addresses = Address::paginate(10);
 
         return $this->viewData($addresses);
     }

@@ -10,7 +10,7 @@ class CourierController extends Controller
 {
     public function index()
     {
-        $couriers = Courier::all();
+        $couriers = Courier::paginate(10);
 
         return $this->viewData($couriers);
     }

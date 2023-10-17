@@ -10,7 +10,7 @@ class TemplateController extends Controller
 {
     public function index()
     {
-        $templates = Template::all();
+        $templates = Template::paginate(10);
 
         return $this->viewData($templates);
     }

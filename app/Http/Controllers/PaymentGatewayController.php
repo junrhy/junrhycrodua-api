@@ -10,7 +10,7 @@ class PaymentGatewayController extends Controller
 {
     public function index()
     {
-        $payments = PaymentGateway::all();
+        $payments = PaymentGateway::paginate(10);
 
         return $this->viewData($payments);
     }

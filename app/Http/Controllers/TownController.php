@@ -10,7 +10,7 @@ class TownController extends Controller
 {
     public function index()
     {
-        $towns = Town::all();
+        $towns = Town::paginate(10);
 
         return $this->viewData($towns);
     }

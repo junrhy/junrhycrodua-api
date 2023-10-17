@@ -10,7 +10,7 @@ class MessageController extends Controller
 {
     public function index()
     {
-        $messages = Message::all();
+        $messages = Message::paginate(10);
 
         return $this->viewData($messages);
     }
