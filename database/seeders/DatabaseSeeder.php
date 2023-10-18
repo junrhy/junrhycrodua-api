@@ -62,6 +62,7 @@ class DatabaseSeeder extends Seeder
             TaxSeeder::class,
             TemplateSeeder::class,
             TownSeeder::class,
+            UserSeeder::class,
             VehicleSeeder::class,
             VendorSeeder::class,
             VoucherSeeder::class

@@ -27,7 +27,7 @@ use App\Http\Controllers\MessageController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PersonController;
 use App\Http\Controllers\PlanController;
-use App\Http\Controllers\PlantsController;
+use App\Http\Controllers\PlantController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\PromotionController;
@@ -101,7 +101,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('products', ProductController::class);
     Route::apiResource('projects', ProjectController::class);
     Route::apiResource('promotions', PromotionController::class);
-    Route::apiResource('provinces', ProvincesController::class);
+    Route::apiResource('provinces', ProvinceController::class);
     Route::apiResource('real_estates', RealEstateController::class);
     Route::apiResource('sales', SaleController::class);
     Route::apiResource('schedules', ScheduleController::class);
@@ -113,5 +113,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('towns', TownController::class);
     Route::apiResource('vehicles', VehicleController::class);
     Route::apiResource('vendors', VendorController::class);
-    Route::apiResource('vouchers', VouchersController::class);
+    Route::apiResource('vouchers', VoucherController::class);
 });
