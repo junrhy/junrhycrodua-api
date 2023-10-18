@@ -10,7 +10,7 @@ class HobbyController extends Controller
 {
     public function index()
     {
-        $hobbies = Hobby::all();
+        $hobbies = Hobby::paginate(10);
 
         return $this->viewData($hobbies);
     }

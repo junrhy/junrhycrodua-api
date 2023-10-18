@@ -10,7 +10,7 @@ class TaxController extends Controller
 {
     public function index()
     {
-        $taxes = Tax::all();
+        $taxes = Tax::paginate(10);
 
         return $this->viewData($taxes);
     }

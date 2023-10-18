@@ -10,7 +10,7 @@ class LeadController extends Controller
 {
     public function index()
     {
-        $leads = Lead::all();
+        $leads = Lead::paginate(10);
 
         return $this->viewData($leads);
     }

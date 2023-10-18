@@ -10,7 +10,7 @@ class StatusController extends Controller
 {
     public function index()
     {
-        $statuses = Status::all();
+        $statuses = Status::paginate(10);
 
         return $this->viewData($statuses);
     }

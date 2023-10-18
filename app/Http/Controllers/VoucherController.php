@@ -10,7 +10,7 @@ class VoucherController extends Controller
 {
     public function index()
     {
-        $vouchers = Voucher::all();
+        $vouchers = Voucher::paginate(10);
 
         return $this->viewData($vouchers);
     }

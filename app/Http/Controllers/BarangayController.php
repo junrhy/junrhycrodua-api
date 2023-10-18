@@ -10,7 +10,7 @@ class BarangayController extends Controller
 {
     public function index()
     {
-        $barangays = Barangay::all();
+        $barangays = Barangay::paginate(10);
 
         return $this->viewData($barangays);
     }

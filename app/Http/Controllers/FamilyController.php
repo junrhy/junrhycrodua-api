@@ -10,7 +10,7 @@ class FamilyController extends Controller
 {
     public function index()
     {
-        $families = Family::all();
+        $families = Family::paginate(10);
 
         return $this->viewData($families);
     }

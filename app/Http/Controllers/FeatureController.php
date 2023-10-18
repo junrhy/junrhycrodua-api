@@ -10,7 +10,7 @@ class FeatureController extends Controller
 {
     public function index()
     {
-        $features = Feature::all();
+        $features = Feature::paginate(10);
 
         return $this->viewData($features);
     }

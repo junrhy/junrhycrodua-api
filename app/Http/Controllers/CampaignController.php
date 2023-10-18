@@ -10,7 +10,7 @@ class CampaignController extends Controller
 {
     public function index()
     {
-        $campaigns = Campaign::all();
+        $campaigns = Campaign::paginate(10);
 
         return $this->viewData($campaigns);
     }
