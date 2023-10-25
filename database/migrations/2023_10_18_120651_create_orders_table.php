@@ -13,12 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        DB::statement('SET SESSION sql_require_primary_key=0');
-        Schema::create('items', function (Blueprint $table) {
+        Schema::create('orders', function (Blueprint $table) {
             $table->uuid('id')->primary()->unique()->default(DB::raw('(UUID())'));
-            $table->integer('user_id');
             $table->string('name');
+            $table->string('source');
+            $table->string('status');
             $table->longText('properties')->nullable();
+            $table->string('type'); // Pick Up, Deliver, Dine In, Take Out
+            $table->datetime('served')->nullable();
+            $table->datetime('cancelled')->nullable();
+            $table->string('cancel_reason')->nullable();
             $table->timestamps();
         });
     }
@@ -30,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('items');
+        Schema::dropIfExists('orders');
     }
 };

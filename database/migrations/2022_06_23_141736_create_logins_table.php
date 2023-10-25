@@ -16,7 +16,8 @@ return new class extends Migration
         DB::statement('SET SESSION sql_require_primary_key=0');
         Schema::create('logins', function (Blueprint $table) {
             $table->uuid('id')->primary()->unique()->default(DB::raw('(UUID())'));
-            $table->datetime('date_time');
+            $table->integer('user_id');
+            $table->uuid('brand_id');
             $table->longText('properties')->nullable();
             $table->timestamps();
         });
