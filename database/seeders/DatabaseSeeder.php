@@ -14,12 +14,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
         $this->call([
             AddressSeeder::class,
             AgentSeeder::class,
@@ -31,6 +25,7 @@ class DatabaseSeeder extends Seeder
             CampaignSeeder::class,
             CardSeeder::class,
             CategorySeeder::class,
+            ClientSeeder::class,
             ContactSeeder::class,
             CountrySeeder::class,
             CourierSeeder::class,

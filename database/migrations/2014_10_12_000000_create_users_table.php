@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id(); // do not use uuid
             $table->string('name');
             $table->uuid('brand_id');
+            $table->uuid('client_id');
             $table->string('email');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

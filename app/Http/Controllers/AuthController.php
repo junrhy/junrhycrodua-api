@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Login;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
@@ -59,7 +60,8 @@ class AuthController extends Controller
         // Check password
         if(!$user || !Hash::check($fields['password'], $user->password)) {
             return response([
-                'message' => 'Bad credentials.'
+                'message' => 'Bad credentials.',
+                'success' => false
             ], 401);
         }
 
@@ -74,9 +76,18 @@ class AuthController extends Controller
 
         $token = $user->createToken($user->name, [$access])->plainTextToken;
 
+        Login::create([
+            'user_id' => $user->id,
+            'brand_id' => $user->brand_id
+        ]);
+
         $response = [
-            'user' => $user,
-            'token' => $token
+            'id' => $user->id,
+            'email' => $user->email,
+            'brand_id' => $user->brand_id,
+            'client_id' => $user->client_id,
+            'token' => $token,
+            'success' => true
         ];
 
         return response($response, 201);
