@@ -83,6 +83,7 @@ class AuthController extends Controller
 
         $response = [
             'id' => $user->id,
+            'name' => $user->name,
             'email' => $user->email,
             'brand_id' => $user->brand_id,
             'client_id' => $user->client_id,

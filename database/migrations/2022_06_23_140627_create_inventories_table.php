@@ -18,6 +18,7 @@ return new class extends Migration
             $table->uuid('id')->primary()->unique()->default(DB::raw('(UUID())'));
             $table->uuid('item_id');
             $table->float('qty');
+            $table->string('unit');
             $table->string('operator');
             $table->timestamps();
         });

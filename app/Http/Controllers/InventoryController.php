@@ -10,7 +10,7 @@ class InventoryController extends Controller
 {
     public function index()
     {
-        $inventories = Inventory::paginate(10);
+        $inventories = Inventory::with('item')->paginate(10);
 
         return $this->viewData($inventories);
     }
