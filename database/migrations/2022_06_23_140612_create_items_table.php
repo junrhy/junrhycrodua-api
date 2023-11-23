@@ -18,6 +18,10 @@ return new class extends Migration
             $table->uuid('id')->primary()->unique()->default(DB::raw('(UUID())'));
             $table->integer('user_id');
             $table->string('name');
+            $table->string('item_code');
+            $table->string('currency');
+            $table->double('price');
+            $table->date('expired_at')->nullable();
             $table->longText('properties')->nullable();
             $table->timestamps();
         });

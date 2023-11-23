@@ -14,7 +14,11 @@ class Item extends Model
 
     protected $fillable = [
         'user_id',
-        'name'
+        'name',
+        'item_code',
+        'currency',
+        'price',
+        'expired_at'
     ];
 
 }

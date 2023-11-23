@@ -10,7 +10,7 @@ class SaleController extends Controller
 {
     public function index()
     {
-        $sales = Sale::paginate(10);
+        $sales = Sale::with('item')->paginate(10);
 
         return $this->viewData($sales);
     }
