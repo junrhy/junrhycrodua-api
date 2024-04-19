@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Tax extends Model
+class Service extends Model
 {
     use HasFactory;
 
@@ -14,6 +14,9 @@ class Tax extends Model
     protected $fillable = [
         'long_name',
         'short_name',
+        'category',
+        'currency',
+        'price',
         'properties'
     ];
 }

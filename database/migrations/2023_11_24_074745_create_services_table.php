@@ -13,10 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        DB::statement('SET SESSION sql_require_primary_key=0');
-        Schema::create('taxes', function (Blueprint $table) {
+        Schema::create('services', function (Blueprint $table) {
             $table->uuid('id')->primary()->unique()->default(DB::raw('(UUID())'));
-            $table->string('name');
+            $table->string('long_name');
+            $table->tinyText('short_name');
+            $table->string('category')->nullable();
+            $table->string('currency');
+            $table->double('price');
             $table->longText('properties')->nullable();
             $table->timestamps();
         });
@@ -29,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('taxes');
+        Schema::dropIfExists('services');
     }
 };

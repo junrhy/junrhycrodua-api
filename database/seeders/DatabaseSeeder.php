@@ -54,7 +54,6 @@ class DatabaseSeeder extends Seeder
             StateSeeder::class,
             StatusSeeder::class,
             SubscriptionSeeder::class,
-            TaxSeeder::class,
             TemplateSeeder::class,
             TownSeeder::class,
             UserSeeder::class,
