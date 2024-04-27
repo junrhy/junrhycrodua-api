@@ -10,7 +10,7 @@ class LogisticController extends Controller
 {
     public function index()
     {
-        $logistics = Logistic::paginate(10);
+        $logistics = Logistic::all();
 
         return $this->viewData($logistics);
     }

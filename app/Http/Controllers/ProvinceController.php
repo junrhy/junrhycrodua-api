@@ -10,7 +10,7 @@ class ProvinceController extends Controller
 {
     public function index()
     {
-        $provinces = Province::paginate(10);
+        $provinces = Province::all();
 
         return $this->viewData($provinces);
     }

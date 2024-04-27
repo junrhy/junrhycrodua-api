@@ -10,7 +10,7 @@ class PersonController extends Controller
 {
     public function index()
     {
-        $persons = Person::paginate(10);
+        $persons = Person::all();
 
         return $this->viewData($persons);
     }

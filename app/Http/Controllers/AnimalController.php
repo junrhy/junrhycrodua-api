@@ -10,7 +10,7 @@ class AnimalController extends Controller
 {
     public function index()
     {
-        $animals = Animal::paginate(10);
+        $animals = Animal::all();
 
         return $this->viewData($animals);
     }

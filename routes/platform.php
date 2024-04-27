@@ -15,7 +15,8 @@ use App\Orchid\Screens\Role\RoleListScreen;
 use App\Orchid\Screens\User\UserEditScreen;
 use App\Orchid\Screens\User\UserListScreen;
 use App\Orchid\Screens\User\UserProfileScreen;
-use App\Orchid\Screens\AnimalScreen;
+use App\Orchid\Screens\AnimalEditScreen;
+use App\Orchid\Screens\AnimalListScreen;
 use Illuminate\Support\Facades\Route;
 use Tabuna\Breadcrumbs\Trail;
 
@@ -98,4 +99,18 @@ Route::screen('example-cards', ExampleCardsScreen::class)->name('platform.exampl
 Route::screen('example-advanced', ExampleFieldsAdvancedScreen::class)->name('platform.example.advanced');
 
 //Route::screen('idea', Idea::class, 'platform.screens.idea');
-Route::screen('animal', AnimalScreen::class)->name('platform.animal');
+Route::screen('animal/{animal?}', AnimalEditScreen::class)
+    ->name('platform.animal.edit')
+    ->breadcrumbs(function (Trail $trail){
+        return $trail
+            ->parent('platform.index')
+            ->push('Animal');
+    });
+
+Route::screen('animals', AnimalListScreen::class)
+    ->name('platform.animal.list')
+    ->breadcrumbs(function (Trail $trail){
+        return $trail
+            ->parent('platform.index')
+            ->push('Animal');
+    });

@@ -10,7 +10,7 @@ class BookingController extends Controller
 {
     public function index()
     {
-        $bookings = Booking::paginate(10);
+        $bookings = Booking::all();
 
         return $this->viewData($bookings);
     }
