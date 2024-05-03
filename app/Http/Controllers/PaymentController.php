@@ -10,7 +10,7 @@ class PaymentController extends Controller
 {
     public function index()
     {
-        $payments = Payment::paginate(10);
+        $payments = Payment::all();
 
         return $this->viewData($payments);
     }

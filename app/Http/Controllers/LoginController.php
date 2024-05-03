@@ -10,7 +10,7 @@ class LoginController extends Controller
 {
     public function index()
     {
-        $logins = Login::paginate(10);
+        $logins = Login::all();
 
         return $this->viewData($logins);
     }

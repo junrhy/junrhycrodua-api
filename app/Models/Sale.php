@@ -12,6 +12,15 @@ class Sale extends Model
     protected $keyType = 'string';
     
     protected $fillable = [
-
+        'item_id',
+        'amount'
     ];
+
+    /**
+     * Get items
+     */
+    public function item(): BelongsTo
+    {
+        return $this->BelongsTo(Item::class);
+    }
 }

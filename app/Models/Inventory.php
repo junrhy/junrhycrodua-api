@@ -13,7 +13,10 @@ class Inventory extends Model
     protected $keyType = 'string';
     
     protected $fillable = [
-
+        'item_id',
+        'qty',
+        'unit',
+        'operator'
     ];
 
     /**

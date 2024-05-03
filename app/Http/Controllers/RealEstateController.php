@@ -10,7 +10,7 @@ class RealEstateController extends Controller
 {
     public function index()
     {
-        $realEstates = RealEstate::paginate(10);
+        $realEstates = RealEstate::all();
 
         return $this->viewData($realEstates);
     }

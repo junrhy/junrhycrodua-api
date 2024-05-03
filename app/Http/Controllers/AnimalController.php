@@ -8,9 +8,15 @@ use App\Models\Animal;
 
 class AnimalController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $animals = Animal::paginate(10);
+        $animal = new Animal;
+
+        if ($request->name) {
+            $animal = $animal->where('name', 'LIKE', '%' . $request->name . '%');
+        }
+
+        $animals = $animal->get();
 
         return $this->viewData($animals);
     }

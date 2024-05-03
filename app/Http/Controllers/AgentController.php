@@ -10,7 +10,7 @@ class AgentController extends Controller
 {
     public function index()
     {
-        $agents = Agent::paginate(10);
+        $agents = Agent::all();
 
         return $this->viewData($agents);
     }

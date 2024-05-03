@@ -17,6 +17,7 @@ return new class extends Migration
         Schema::create('sales', function (Blueprint $table) {
             $table->uuid('id')->primary()->unique()->default(DB::raw('(UUID())'));
             $table->uuid('item_id');
+            $table->double('amount');
             $table->longText('properties')->nullable();
             $table->timestamps();
         });

@@ -15,14 +15,6 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        User::truncate();
-
-        User::create([
-            "name" => "Administrator",
-            "email" => "admin@junrhycrodua.com",
-            "password" => bcrypt("password"),
-            "brand_id" => "f6f2202a-6d82-11ee-91c0-0242ac120005",
-            "client_id" => "642e8036-d835-4619-a41f-5fe625fc54ab"
-        ]);
+        //
     }
 }

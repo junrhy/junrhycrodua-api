@@ -5,12 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Inventory;
+use App\Models\Item;
 
 class InventoryController extends Controller
 {
     public function index()
     {
-        $inventories = Inventory::with('item')->paginate(10);
+        $inventories = Inventory::with('item')->all();
 
         return $this->viewData($inventories);
     }
@@ -40,7 +41,10 @@ class InventoryController extends Controller
     public function destroy($id)
     {
         $ids = explode(",",$id);
+        $item_ids = Inventory::select('item_id')->whereIn('id', $ids)->get();
+        
         Inventory::whereIn('id', $ids)->delete();
+        Item::whereIn('id', $item_ids)->delete();
 
         return 204;
     }
