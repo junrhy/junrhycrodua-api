@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Orchid\Layouts;
+namespace App\Orchid\Layouts\Animal;
 
 use App\Models\Animal;
 use Orchid\Screen\Layouts\Table;

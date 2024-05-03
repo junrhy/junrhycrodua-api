@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Orchid\Screens;
+namespace App\Orchid\Screens\State;
 
-use App\Orchid\Layouts\AnimalListLayout;
-use App\Models\Animal;
+use App\Orchid\Layouts\State\StateListLayout;
+use App\Models\State;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Screen;
 
-class AnimalListScreen extends Screen
+class StateListScreen extends Screen
 {
     /**
      * Query data.
@@ -17,7 +17,7 @@ class AnimalListScreen extends Screen
     public function query(): array
     {
         return [
-            'animals' => Animal::filters()->defaultSort('name', 'asc')->paginate()
+            'states' => State::filters()->defaultSort('long_name', 'asc')->paginate()
         ];
     }
 
@@ -26,7 +26,7 @@ class AnimalListScreen extends Screen
      */
     public function name(): ?string
     {
-        return 'Animals';
+        return 'States';
     }
 
     /**
@@ -34,7 +34,7 @@ class AnimalListScreen extends Screen
      */
     public function description(): ?string
     {
-        return "All kind of animals";
+        return "All states";
     }
 
     /**
@@ -47,7 +47,7 @@ class AnimalListScreen extends Screen
         return [
             Link::make('Create new')
                 ->icon('pencil')
-                ->route('platform.animal.edit')
+                ->route('platform.country.edit')
         ];
     }
 
@@ -59,7 +59,7 @@ class AnimalListScreen extends Screen
     public function layout(): array
     {
         return [
-            AnimalListLayout::class
+            StateListLayout::class
         ];
     }
 }

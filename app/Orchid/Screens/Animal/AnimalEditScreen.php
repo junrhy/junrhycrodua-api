@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Orchid\Screens;
+namespace App\Orchid\Screens\Animal;
 
 use App\Models\Animal;
 use Illuminate\Http\Request;
@@ -73,7 +73,7 @@ class AnimalEditScreen extends Screen
             Button::make('Remove')
                 ->icon('trash')
                 ->method('remove')
-                ->confirm(__('Once the account is deleted, all of its resources and data will be permanently deleted.'))
+                ->confirm(__('Once the record is deleted, all of its resources and data will be permanently deleted.'))
                 ->canSee($deletePermission),
         ];
     }

@@ -15,8 +15,20 @@ use App\Orchid\Screens\Role\RoleListScreen;
 use App\Orchid\Screens\User\UserEditScreen;
 use App\Orchid\Screens\User\UserListScreen;
 use App\Orchid\Screens\User\UserProfileScreen;
-use App\Orchid\Screens\AnimalEditScreen;
-use App\Orchid\Screens\AnimalListScreen;
+use App\Orchid\Screens\Animal\AnimalEditScreen;
+use App\Orchid\Screens\Animal\AnimalListScreen;
+use App\Orchid\Screens\Plant\PlantEditScreen;
+use App\Orchid\Screens\Plant\PlantListScreen;
+use App\Orchid\Screens\Barangay\BarangayEditScreen;
+use App\Orchid\Screens\Barangay\BarangayListScreen;
+use App\Orchid\Screens\Town\TownEditScreen;
+use App\Orchid\Screens\Town\TownListScreen;
+use App\Orchid\Screens\Province\ProvinceEditScreen;
+use App\Orchid\Screens\Province\ProvinceListScreen;
+use App\Orchid\Screens\Country\CountryEditScreen;
+use App\Orchid\Screens\Country\CountryListScreen;
+use App\Orchid\Screens\State\StateEditScreen;
+use App\Orchid\Screens\State\StateListScreen;
 use Illuminate\Support\Facades\Route;
 use Tabuna\Breadcrumbs\Trail;
 
@@ -98,7 +110,6 @@ Route::screen('example-editors', ExampleTextEditorsScreen::class)->name('platfor
 Route::screen('example-cards', ExampleCardsScreen::class)->name('platform.example.cards');
 Route::screen('example-advanced', ExampleFieldsAdvancedScreen::class)->name('platform.example.advanced');
 
-//Route::screen('idea', Idea::class, 'platform.screens.idea');
 Route::screen('animal/{animal?}', AnimalEditScreen::class)
     ->name('platform.animal.edit')
     ->breadcrumbs(function (Trail $trail){
@@ -113,4 +124,100 @@ Route::screen('animals', AnimalListScreen::class)
         return $trail
             ->parent('platform.index')
             ->push('Animal');
+    });
+
+Route::screen('plant/{plant?}', PlantEditScreen::class)
+    ->name('platform.plant.edit')
+    ->breadcrumbs(function (Trail $trail){
+        return $trail
+            ->parent('platform.index')
+            ->push('Plant');
+    });
+
+Route::screen('plants', PlantListScreen::class)
+    ->name('platform.plant.list')
+    ->breadcrumbs(function (Trail $trail){
+        return $trail
+            ->parent('platform.index')
+            ->push('Plant');
+    });
+
+Route::screen('barangay/{barangay?}', BarangayEditScreen::class)
+    ->name('platform.barangay.edit')
+    ->breadcrumbs(function (Trail $trail){
+        return $trail
+            ->parent('platform.index')
+            ->push('Barangay');
+    });
+
+Route::screen('barangays', BarangayListScreen::class)
+    ->name('platform.barangay.list')
+    ->breadcrumbs(function (Trail $trail){
+        return $trail
+            ->parent('platform.index')
+            ->push('Barangay');
+    });
+
+Route::screen('town/{town?}', TownEditScreen::class)
+    ->name('platform.town.edit')
+    ->breadcrumbs(function (Trail $trail){
+        return $trail
+            ->parent('platform.index')
+            ->push('Town');
+    });
+
+Route::screen('towns', TownListScreen::class)
+    ->name('platform.town.list')
+    ->breadcrumbs(function (Trail $trail){
+        return $trail
+            ->parent('platform.index')
+            ->push('Town');
+    });
+
+Route::screen('province/{province?}', ProvinceEditScreen::class)
+    ->name('platform.province.edit')
+    ->breadcrumbs(function (Trail $trail){
+        return $trail
+            ->parent('platform.index')
+            ->push('Province');
+    });
+
+Route::screen('provinces', ProvinceListScreen::class)
+    ->name('platform.province.list')
+    ->breadcrumbs(function (Trail $trail){
+        return $trail
+            ->parent('platform.index')
+            ->push('Province');
+    });
+
+Route::screen('country/{country?}', CountryEditScreen::class)
+    ->name('platform.country.edit')
+    ->breadcrumbs(function (Trail $trail){
+        return $trail
+            ->parent('platform.index')
+            ->push('Country');
+    });
+
+Route::screen('countries', CountryListScreen::class)
+    ->name('platform.country.list')
+    ->breadcrumbs(function (Trail $trail){
+        return $trail
+            ->parent('platform.index')
+            ->push('Country');
+    });
+
+Route::screen('state/{state?}', StateEditScreen::class)
+    ->name('platform.state.edit')
+    ->breadcrumbs(function (Trail $trail){
+        return $trail
+            ->parent('platform.index')
+            ->push('State');
+    });
+
+Route::screen('states', StateListScreen::class)
+    ->name('platform.state.list')
+    ->breadcrumbs(function (Trail $trail){
+        return $trail
+            ->parent('platform.index')
+            ->push('State');
     });

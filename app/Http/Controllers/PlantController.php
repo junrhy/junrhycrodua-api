@@ -8,9 +8,15 @@ use App\Models\Plant;
 
 class PlantController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $plants = Plant::all();
+        $plant = new Plant;
+
+        if ($request->name) {
+            $plant = $plant->where('name', 'LIKE', '%' . $request->name . '%');
+        }
+
+        $plants = $plant->get();
 
         return $this->viewData($plants);
     }

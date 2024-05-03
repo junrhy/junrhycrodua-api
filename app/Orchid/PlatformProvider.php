@@ -33,6 +33,20 @@ class PlatformProvider extends OrchidServiceProvider
             ->route('platform.animal.list')
             ->title('API Management'),
 
+            Menu::make('Plants')
+            ->icon('fa.tree')
+            ->route('platform.plant.list'),
+
+            Menu::make('Locations')
+                ->icon('location-dot')
+                ->list([
+                    Menu::make('Barangays')->route('platform.barangay.list'),
+                    Menu::make('Towns')->route('platform.town.list'),
+                    Menu::make('Provinces')->route('platform.province.list'),
+                    Menu::make('Countries')->route('platform.country.list'),
+                    Menu::make('States')->route('platform.state.list'),
+                ]),
+
             // Menu::make('Example screen')
             //     ->icon('monitor')
             //     ->route('platform.example')
