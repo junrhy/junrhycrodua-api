@@ -31,7 +31,7 @@ class PlatformProvider extends OrchidServiceProvider
             Menu::make('Animals')
             ->icon('fa.dog')
             ->route('platform.animal.list')
-            ->title('API Management'),
+            ->title('Data Management'),
 
             Menu::make('Plants')
             ->icon('fa.tree')
@@ -46,6 +46,22 @@ class PlatformProvider extends OrchidServiceProvider
                     Menu::make('Countries')->route('platform.country.list'),
                     Menu::make('States')->route('platform.state.list'),
                 ]),
+
+            Menu::make('Orders')
+            ->icon('fa.cash-register')
+            ->route('platform.order.list'),
+
+            Menu::make('Logistics')
+            ->icon('fa.truck')
+            ->route('platform.logistic.list'),
+            
+            Menu::make('Sales')
+            ->icon('fa.credit-card')
+            ->route('platform.sale.list'),
+            
+            Menu::make('Inventory')
+            ->icon('fa.boxes-stacked')
+            ->route('platform.inventory.list'),
 
             // Menu::make('Example screen')
             //     ->icon('monitor')

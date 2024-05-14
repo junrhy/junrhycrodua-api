@@ -29,6 +29,15 @@ use App\Orchid\Screens\Country\CountryEditScreen;
 use App\Orchid\Screens\Country\CountryListScreen;
 use App\Orchid\Screens\State\StateEditScreen;
 use App\Orchid\Screens\State\StateListScreen;
+use App\Orchid\Screens\Order\OrderEditScreen;
+use App\Orchid\Screens\Order\OrderListScreen;
+use App\Orchid\Screens\Sale\SaleEditScreen;
+use App\Orchid\Screens\Sale\SaleListScreen;
+use App\Orchid\Screens\Inventory\InventoryEditScreen;
+use App\Orchid\Screens\Inventory\InventoryListScreen;
+use App\Orchid\Screens\Logistic\LogisticEditScreen;
+use App\Orchid\Screens\Logistic\LogisticListScreen;
+
 use Illuminate\Support\Facades\Route;
 use Tabuna\Breadcrumbs\Trail;
 
@@ -220,4 +229,68 @@ Route::screen('states', StateListScreen::class)
         return $trail
             ->parent('platform.index')
             ->push('State');
+    });
+
+Route::screen('order/{order?}', OrderEditScreen::class)
+    ->name('platform.order.edit')
+    ->breadcrumbs(function (Trail $trail){
+        return $trail
+            ->parent('platform.index')
+            ->push('Order');
+    });
+
+Route::screen('orders', OrderListScreen::class)
+    ->name('platform.order.list')
+    ->breadcrumbs(function (Trail $trail){
+        return $trail
+            ->parent('platform.index')
+            ->push('Order');
+    });
+
+Route::screen('sale/{sale?}', SaleEditScreen::class)
+    ->name('platform.sale.edit')
+    ->breadcrumbs(function (Trail $trail){
+        return $trail
+            ->parent('platform.index')
+            ->push('Sale');
+    });
+
+Route::screen('sales', SaleListScreen::class)
+    ->name('platform.sale.list')
+    ->breadcrumbs(function (Trail $trail){
+        return $trail
+            ->parent('platform.index')
+            ->push('Sale');
+    });
+
+Route::screen('inventory/{inventory?}', InventoryEditScreen::class)
+    ->name('platform.inventory.edit')
+    ->breadcrumbs(function (Trail $trail){
+        return $trail
+            ->parent('platform.index')
+            ->push('Inventory');
+    });
+
+Route::screen('inventory', InventoryListScreen::class)
+    ->name('platform.inventory.list')
+    ->breadcrumbs(function (Trail $trail){
+        return $trail
+            ->parent('platform.index')
+            ->push('Inventory');
+    });
+
+Route::screen('logistic/{logistic?}', LogisticEditScreen::class)
+    ->name('platform.logistic.edit')
+    ->breadcrumbs(function (Trail $trail){
+        return $trail
+            ->parent('platform.index')
+            ->push('Logistic');
+    });
+
+Route::screen('logistics', LogisticListScreen::class)
+    ->name('platform.logistic.list')
+    ->breadcrumbs(function (Trail $trail){
+        return $trail
+            ->parent('platform.index')
+            ->push('Logistic');
     });
