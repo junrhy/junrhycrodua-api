@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Orchid\Screens\Inventory;
+namespace App\Orchid\Screens\Person;
 
-use App\Orchid\Layouts\Inventory\InventoryListLayout;
-use App\Models\Inventory;
+use App\Orchid\Layouts\Person\PersonListLayout;
+use App\Models\Person;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Screen;
 
-class InventoryListScreen extends Screen
+class PersonListScreen extends Screen
 {
     /**
      * Query data.
@@ -17,7 +17,7 @@ class InventoryListScreen extends Screen
     public function query(): array
     {
         return [
-            'inventories' => Inventory::filters()->defaultSort('qty', 'asc')->paginate()
+            'people' => Person::filters()->defaultSort('amount', 'asc')->paginate()
         ];
     }
 
@@ -26,7 +26,7 @@ class InventoryListScreen extends Screen
      */
     public function name(): ?string
     {
-        return 'Inventory';
+        return 'People';
     }
 
     /**
@@ -34,7 +34,7 @@ class InventoryListScreen extends Screen
      */
     public function description(): ?string
     {
-        return "All inventory";
+        return "All people";
     }
 
     /**
@@ -47,7 +47,7 @@ class InventoryListScreen extends Screen
         return [
             Link::make('Create new')
                 ->icon('pencil')
-                ->route('platform.inventory.edit')
+                ->route('platform.person.edit')
         ];
     }
 
@@ -59,7 +59,7 @@ class InventoryListScreen extends Screen
     public function layout(): array
     {
         return [
-            InventoryListLayout::class
+            PersonListLayout::class
         ];
     }
 }

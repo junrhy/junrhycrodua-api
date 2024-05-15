@@ -56,8 +56,7 @@ class AnimalEditScreen extends Screen
      */
     public function commandBar(): array
     {
-        $deletePermission = $this->animal->exists;
-        $deletePermission = Auth::user()->hasAccess('platform.delete');
+        $deletePermission = $this->animal->exists && Auth::user()->hasAccess('platform.delete');
 
         return [
             Button::make('Save')

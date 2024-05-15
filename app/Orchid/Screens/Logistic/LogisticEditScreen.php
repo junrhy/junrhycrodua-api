@@ -56,8 +56,7 @@ class LogisticEditScreen extends Screen
      */
     public function commandBar(): array
     {
-        $deletePermission = $this->logistic->exists;
-        $deletePermission = Auth::user()->hasAccess('platform.delete');
+        $deletePermission = $this->logistic->exists && Auth::user()->hasAccess('platform.delete');
 
         return [
             Button::make('Save')

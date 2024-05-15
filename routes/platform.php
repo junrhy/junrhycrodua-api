@@ -33,10 +33,20 @@ use App\Orchid\Screens\Order\OrderEditScreen;
 use App\Orchid\Screens\Order\OrderListScreen;
 use App\Orchid\Screens\Sale\SaleEditScreen;
 use App\Orchid\Screens\Sale\SaleListScreen;
+use App\Orchid\Screens\Payment\PaymentEditScreen;
+use App\Orchid\Screens\Payment\PaymentListScreen;
+use App\Orchid\Screens\Subscription\SubscriptionEditScreen;
+use App\Orchid\Screens\Subscription\SubscriptionListScreen;
 use App\Orchid\Screens\Inventory\InventoryEditScreen;
 use App\Orchid\Screens\Inventory\InventoryListScreen;
+use App\Orchid\Screens\Item\ItemEditScreen;
+use App\Orchid\Screens\Item\ItemListScreen;
 use App\Orchid\Screens\Logistic\LogisticEditScreen;
 use App\Orchid\Screens\Logistic\LogisticListScreen;
+use App\Orchid\Screens\Person\PersonEditScreen;
+use App\Orchid\Screens\Person\PersonListScreen;
+use App\Orchid\Screens\Client\ClientEditScreen;
+use App\Orchid\Screens\Client\ClientListScreen;
 
 use Illuminate\Support\Facades\Route;
 use Tabuna\Breadcrumbs\Trail;
@@ -263,20 +273,36 @@ Route::screen('sales', SaleListScreen::class)
             ->push('Sale');
     });
 
-Route::screen('inventory/{inventory?}', InventoryEditScreen::class)
-    ->name('platform.inventory.edit')
+Route::screen('payment/{payment?}', PaymentEditScreen::class)
+    ->name('platform.payment.edit')
     ->breadcrumbs(function (Trail $trail){
         return $trail
             ->parent('platform.index')
-            ->push('Inventory');
+            ->push('Payment');
     });
 
-Route::screen('inventory', InventoryListScreen::class)
-    ->name('platform.inventory.list')
+Route::screen('payments', PaymentListScreen::class)
+    ->name('platform.payment.list')
     ->breadcrumbs(function (Trail $trail){
         return $trail
             ->parent('platform.index')
-            ->push('Inventory');
+            ->push('Payment');
+    });
+
+Route::screen('subscription/{subscription?}', SubscriptionEditScreen::class)
+    ->name('platform.subscription.edit')
+    ->breadcrumbs(function (Trail $trail){
+        return $trail
+            ->parent('platform.index')
+            ->push('Subscription');
+    });
+
+Route::screen('subscriptions', SubscriptionListScreen::class)
+    ->name('platform.subscription.list')
+    ->breadcrumbs(function (Trail $trail){
+        return $trail
+            ->parent('platform.index')
+            ->push('Subscription');
     });
 
 Route::screen('logistic/{logistic?}', LogisticEditScreen::class)
@@ -293,4 +319,68 @@ Route::screen('logistics', LogisticListScreen::class)
         return $trail
             ->parent('platform.index')
             ->push('Logistic');
+    });
+
+Route::screen('inventory/{inventory?}', InventoryEditScreen::class)
+    ->name('platform.inventory.edit')
+    ->breadcrumbs(function (Trail $trail){
+        return $trail
+            ->parent('platform.index')
+            ->push('Inventory');
+    });
+
+Route::screen('inventories', InventoryListScreen::class)
+    ->name('platform.inventory.list')
+    ->breadcrumbs(function (Trail $trail){
+        return $trail
+            ->parent('platform.index')
+            ->push('Inventory');
+    });
+
+Route::screen('item/{item?}', ItemEditScreen::class)
+    ->name('platform.item.edit')
+    ->breadcrumbs(function (Trail $trail){
+        return $trail
+            ->parent('platform.index')
+            ->push('Item');
+    });
+
+Route::screen('items', ItemListScreen::class)
+    ->name('platform.item.list')
+    ->breadcrumbs(function (Trail $trail){
+        return $trail
+            ->parent('platform.index')
+            ->push('Item');
+    });
+
+Route::screen('person/{person?}', PersonEditScreen::class)
+    ->name('platform.person.edit')
+    ->breadcrumbs(function (Trail $trail){
+        return $trail
+            ->parent('platform.index')
+            ->push('Person');
+    });
+
+Route::screen('people', PersonListScreen::class)
+    ->name('platform.person.list')
+    ->breadcrumbs(function (Trail $trail){
+        return $trail
+            ->parent('platform.index')
+            ->push('Person');
+    });
+
+Route::screen('client/{client?}', ClientEditScreen::class)
+    ->name('platform.client.edit')
+    ->breadcrumbs(function (Trail $trail){
+        return $trail
+            ->parent('platform.index')
+            ->push('Client');
+    });
+
+Route::screen('clients', ClientListScreen::class)
+    ->name('platform.client.list')
+    ->breadcrumbs(function (Trail $trail){
+        return $trail
+            ->parent('platform.index')
+            ->push('Client');
     });

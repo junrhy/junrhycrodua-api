@@ -56,8 +56,7 @@ class PlantEditScreen extends Screen
      */
     public function commandBar(): array
     {
-        $deletePermission = $this->plant->exists;
-        $deletePermission = Auth::user()->hasAccess('platform.delete');
+        $deletePermission = $this->plant->exists && Auth::user()->hasAccess('platform.delete');
 
         return [
             Button::make('Save')

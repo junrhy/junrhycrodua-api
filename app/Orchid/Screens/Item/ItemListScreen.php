@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Orchid\Screens\Inventory;
+namespace App\Orchid\Screens\Item;
 
-use App\Orchid\Layouts\Inventory\InventoryListLayout;
-use App\Models\Inventory;
+use App\Orchid\Layouts\Item\ItemListLayout;
+use App\Models\Item;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Screen;
 
-class InventoryListScreen extends Screen
+class ItemListScreen extends Screen
 {
     /**
      * Query data.
@@ -17,7 +17,7 @@ class InventoryListScreen extends Screen
     public function query(): array
     {
         return [
-            'inventories' => Inventory::filters()->defaultSort('qty', 'asc')->paginate()
+            'items' => Item::filters()->defaultSort('amount', 'asc')->paginate()
         ];
     }
 
@@ -26,7 +26,7 @@ class InventoryListScreen extends Screen
      */
     public function name(): ?string
     {
-        return 'Inventory';
+        return 'Items';
     }
 
     /**
@@ -34,7 +34,7 @@ class InventoryListScreen extends Screen
      */
     public function description(): ?string
     {
-        return "All inventory";
+        return "All items";
     }
 
     /**
@@ -47,7 +47,7 @@ class InventoryListScreen extends Screen
         return [
             Link::make('Create new')
                 ->icon('pencil')
-                ->route('platform.inventory.edit')
+                ->route('platform.item.edit')
         ];
     }
 
@@ -59,7 +59,7 @@ class InventoryListScreen extends Screen
     public function layout(): array
     {
         return [
-            InventoryListLayout::class
+            ItemListLayout::class
         ];
     }
 }

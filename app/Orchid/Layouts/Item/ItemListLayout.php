@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Orchid\Layouts\Sale;
+namespace App\Orchid\Layouts\Item;
 
-use App\Models\Sale;
+use App\Models\Item;
 use Orchid\Screen\Layouts\Table;
 use Orchid\Screen\TD;
 use Orchid\Screen\Actions\Link;
 
-class SaleListLayout extends Table
+class ItemListLayout extends Table
 {
     /**
      * Data source.
@@ -24,14 +24,14 @@ class SaleListLayout extends Table
         return [
             TD::make('name', 'Name')
                 ->sort()
-                ->render(function (Sale $item) {
+                ->render(function (Item $item) {
                     return Link::make($item->name)
                         ->route('platform.item.edit', $item);
                 }),
 
             TD::make('created_at', 'Added Date')
                 ->sort()
-                ->render(function (Sale $item) {
+                ->render(function (Item $item) {
                     return date_format($item->created_at, "Y-m-d");
                 }),
         ];

@@ -56,8 +56,7 @@ class CountryEditScreen extends Screen
      */
     public function commandBar(): array
     {
-        $deletePermission = $this->country->exists;
-        $deletePermission = Auth::user()->hasAccess('platform.delete');
+        $deletePermission = $this->country->exists && Auth::user()->hasAccess('platform.delete');
 
         return [
             Button::make('Save')

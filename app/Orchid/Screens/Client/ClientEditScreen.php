@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Orchid\Screens\Province;
+namespace App\Orchid\Screens\Client;
 
-use App\Models\Province;
+use App\Models\Client;
 use Illuminate\Http\Request;
 use Orchid\Screen\Fields\Input;
 use Orchid\Support\Facades\Layout;
@@ -11,24 +11,24 @@ use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Alert;
 use Auth;
 
-class ProvinceEditScreen extends Screen
+class ClientEditScreen extends Screen
 {
     /**
-     * @var Province
+     * @var Client
      */
-    public $province;
+    public $client;
 
     /**
      * Query data.
      *
-     * @param Province $province
+     * @param Client $client
      *
      * @return array
      */
-    public function query(Province $province): array
+    public function query(Client $client): array
     {
         return [
-            'province' => $province
+            'client' => $client
         ];
     }
 
@@ -38,7 +38,7 @@ class ProvinceEditScreen extends Screen
      */
     public function name(): ?string
     {
-        return $this->province->exists ? 'Edit' : 'Create';
+        return $this->client->exists ? 'Edit' : 'Create';
     }
 
     /**
@@ -46,7 +46,7 @@ class ProvinceEditScreen extends Screen
      */
     public function description(): ?string
     {
-         return $this->province->exists ? 'Edit province details' : 'Add new province';;
+         return $this->client->exists ? 'Edit client details' : 'Add new client';;
     }
 
     /**
@@ -56,18 +56,18 @@ class ProvinceEditScreen extends Screen
      */
     public function commandBar(): array
     {
-        $deletePermission = $this->province->exists && Auth::user()->hasAccess('platform.delete');
+        $deletePermission = $this->client->exists && Auth::user()->hasAccess('platform.delete');
 
         return [
             Button::make('Save')
                 ->icon('save')
                 ->method('createOrUpdate')
-                ->canSee(!$this->province->exists),
+                ->canSee(!$this->client->exists),
 
             Button::make('Update')
                 ->icon('note')
                 ->method('createOrUpdate')
-                ->canSee($this->province->exists),
+                ->canSee($this->client->exists),
 
             Button::make('Remove')
                 ->icon('trash')
@@ -84,9 +84,11 @@ class ProvinceEditScreen extends Screen
      */
     public function layout(): array
     {
+        // $properties = (array) json_decode($this->client->properties, true);
+
         return [
             Layout::rows([
-                Input::make('province.long_name')
+                Input::make('client.long_name')
                     ->title('Name')
                     ->placeholder('Enter name'),
             ])
@@ -98,28 +100,28 @@ class ProvinceEditScreen extends Screen
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function createOrUpdate(Request $request, Province $province)
+    public function createOrUpdate(Request $request, Client $client)
     {
         $input = [
-            'long_name' => $request->province['long_name']
+            'amount' => $request->client['amount']
         ];
 
-        $province->fill($input)->save();
+        $client->fill($input)->save();
 
-        Alert::info('You have successfully created a province.');
+        Alert::info('You have successfully created a client.');
 
-        return redirect()->route('platform.province.list');
+        return redirect()->route('platform.client.list');
     }
 
     /**
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function remove(Province $province)
+    public function remove(Client $client)
     {
-        $province->delete();
+        $client->delete();
 
-        Alert::info('You have successfully deleted the province.');
+        Alert::info('You have successfully deleted the client.');
 
-        return redirect()->route('platform.province.list');
+        return redirect()->route('platform.client.list');
     }
 }

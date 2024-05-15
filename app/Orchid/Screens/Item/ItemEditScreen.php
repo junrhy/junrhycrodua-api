@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Orchid\Screens\Province;
+namespace App\Orchid\Screens\Item;
 
-use App\Models\Province;
+use App\Models\Item;
 use Illuminate\Http\Request;
 use Orchid\Screen\Fields\Input;
 use Orchid\Support\Facades\Layout;
@@ -11,24 +11,24 @@ use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Alert;
 use Auth;
 
-class ProvinceEditScreen extends Screen
+class ItemEditScreen extends Screen
 {
     /**
-     * @var Province
+     * @var Item
      */
-    public $province;
+    public $item;
 
     /**
      * Query data.
      *
-     * @param Province $province
+     * @param Item $item
      *
      * @return array
      */
-    public function query(Province $province): array
+    public function query(Item $item): array
     {
         return [
-            'province' => $province
+            'item' => $item
         ];
     }
 
@@ -38,7 +38,7 @@ class ProvinceEditScreen extends Screen
      */
     public function name(): ?string
     {
-        return $this->province->exists ? 'Edit' : 'Create';
+        return $this->item->exists ? 'Edit' : 'Create';
     }
 
     /**
@@ -46,7 +46,7 @@ class ProvinceEditScreen extends Screen
      */
     public function description(): ?string
     {
-         return $this->province->exists ? 'Edit province details' : 'Add new province';;
+         return $this->item->exists ? 'Edit item details' : 'Add new item';;
     }
 
     /**
@@ -56,18 +56,18 @@ class ProvinceEditScreen extends Screen
      */
     public function commandBar(): array
     {
-        $deletePermission = $this->province->exists && Auth::user()->hasAccess('platform.delete');
+        $deletePermission = $this->item->exists && Auth::user()->hasAccess('platform.delete');
 
         return [
             Button::make('Save')
                 ->icon('save')
                 ->method('createOrUpdate')
-                ->canSee(!$this->province->exists),
+                ->canSee(!$this->item->exists),
 
             Button::make('Update')
                 ->icon('note')
                 ->method('createOrUpdate')
-                ->canSee($this->province->exists),
+                ->canSee($this->item->exists),
 
             Button::make('Remove')
                 ->icon('trash')
@@ -84,9 +84,11 @@ class ProvinceEditScreen extends Screen
      */
     public function layout(): array
     {
+        // $properties = (array) json_decode($this->item->properties, true);
+
         return [
             Layout::rows([
-                Input::make('province.long_name')
+                Input::make('item.name')
                     ->title('Name')
                     ->placeholder('Enter name'),
             ])
@@ -98,28 +100,28 @@ class ProvinceEditScreen extends Screen
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function createOrUpdate(Request $request, Province $province)
+    public function createOrUpdate(Request $request, Item $item)
     {
         $input = [
-            'long_name' => $request->province['long_name']
+            'name' => $request->item['name']
         ];
 
-        $province->fill($input)->save();
+        $item->fill($input)->save();
 
-        Alert::info('You have successfully created a province.');
+        Alert::info('You have successfully created a item.');
 
-        return redirect()->route('platform.province.list');
+        return redirect()->route('platform.item.list');
     }
 
     /**
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function remove(Province $province)
+    public function remove(Item $item)
     {
-        $province->delete();
+        $item->delete();
 
-        Alert::info('You have successfully deleted the province.');
+        Alert::info('You have successfully deleted the item.');
 
-        return redirect()->route('platform.province.list');
+        return redirect()->route('platform.item.list');
     }
 }

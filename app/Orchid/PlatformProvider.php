@@ -58,11 +58,31 @@ class PlatformProvider extends OrchidServiceProvider
             Menu::make('Sales')
             ->icon('fa.credit-card')
             ->route('platform.sale.list'),
+
+            Menu::make('Payments')
+            ->icon('fa.credit-card')
+            ->route('platform.payment.list'),
+
+            Menu::make('Subscriptions')
+            ->icon('fa.credit-card')
+            ->route('platform.subscription.list'),
             
             Menu::make('Inventory')
             ->icon('fa.boxes-stacked')
             ->route('platform.inventory.list'),
 
+            Menu::make('Items')
+            ->icon('fa.box')
+            ->route('platform.item.list'),
+
+            Menu::make('Clients')
+            ->icon('fa.people-arrows')
+            ->route('platform.client.list'),
+
+            Menu::make('People')
+            ->icon('fa.people-group')
+            ->route('platform.person.list'),
+            
             // Menu::make('Example screen')
             //     ->icon('monitor')
             //     ->route('platform.example')

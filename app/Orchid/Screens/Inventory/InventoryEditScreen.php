@@ -25,10 +25,10 @@ class InventoryEditScreen extends Screen
      *
      * @return array
      */
-    public function query(Inventory $inventories): array
+    public function query(Inventory $inventory): array
     {
         return [
-            'inventory' => $inventories
+            'inventory' => $inventory
         ];
     }
 
@@ -56,8 +56,7 @@ class InventoryEditScreen extends Screen
      */
     public function commandBar(): array
     {
-        $deletePermission = $this->inventory->exists;
-        $deletePermission = Auth::user()->hasAccess('platform.delete');
+        $deletePermission = $this->inventory->exists && Auth::user()->hasAccess('platform.delete');
 
         return [
             Button::make('Save')

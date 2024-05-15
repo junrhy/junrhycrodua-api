@@ -4,8 +4,23 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Orchid\Screen\AsSource;
+use Orchid\Filters\Filterable;
 
 class Client extends Model
 {
-    use HasFactory;
+    use HasFactory, AsSource, Filterable;
+
+    protected $keyType = 'string';
+    
+    protected $fillable = [
+
+    ];
+
+    /**
+     * @var array
+     */
+    protected $allowedSorts = [
+        'created_at'
+    ];
 }

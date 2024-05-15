@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Orchid\Screens\Province;
+namespace App\Orchid\Screens\Person;
 
-use App\Models\Province;
+use App\Models\Person;
 use Illuminate\Http\Request;
 use Orchid\Screen\Fields\Input;
 use Orchid\Support\Facades\Layout;
@@ -11,24 +11,24 @@ use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Alert;
 use Auth;
 
-class ProvinceEditScreen extends Screen
+class PersonEditScreen extends Screen
 {
     /**
-     * @var Province
+     * @var Person
      */
-    public $province;
+    public $person;
 
     /**
      * Query data.
      *
-     * @param Province $province
+     * @param Person $person
      *
      * @return array
      */
-    public function query(Province $province): array
+    public function query(Person $person): array
     {
         return [
-            'province' => $province
+            'person' => $person
         ];
     }
 
@@ -38,7 +38,7 @@ class ProvinceEditScreen extends Screen
      */
     public function name(): ?string
     {
-        return $this->province->exists ? 'Edit' : 'Create';
+        return $this->person->exists ? 'Edit' : 'Create';
     }
 
     /**
@@ -46,7 +46,7 @@ class ProvinceEditScreen extends Screen
      */
     public function description(): ?string
     {
-         return $this->province->exists ? 'Edit province details' : 'Add new province';;
+         return $this->person->exists ? 'Edit person details' : 'Add new person';;
     }
 
     /**
@@ -56,18 +56,18 @@ class ProvinceEditScreen extends Screen
      */
     public function commandBar(): array
     {
-        $deletePermission = $this->province->exists && Auth::user()->hasAccess('platform.delete');
+        $deletePermission = $this->person->exists && Auth::user()->hasAccess('platform.delete');
 
         return [
             Button::make('Save')
                 ->icon('save')
                 ->method('createOrUpdate')
-                ->canSee(!$this->province->exists),
+                ->canSee(!$this->person->exists),
 
             Button::make('Update')
                 ->icon('note')
                 ->method('createOrUpdate')
-                ->canSee($this->province->exists),
+                ->canSee($this->person->exists),
 
             Button::make('Remove')
                 ->icon('trash')
@@ -84,11 +84,13 @@ class ProvinceEditScreen extends Screen
      */
     public function layout(): array
     {
+        // $properties = (array) json_decode($this->person->properties, true);
+
         return [
             Layout::rows([
-                Input::make('province.long_name')
-                    ->title('Name')
-                    ->placeholder('Enter name'),
+                Input::make('person.first_name')
+                    ->title('First Name')
+                    ->placeholder('Enter First Name'),
             ])
         ];
     }
@@ -98,28 +100,28 @@ class ProvinceEditScreen extends Screen
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function createOrUpdate(Request $request, Province $province)
+    public function createOrUpdate(Request $request, Person $person)
     {
         $input = [
-            'long_name' => $request->province['long_name']
+            'amount' => $request->person['amount']
         ];
 
-        $province->fill($input)->save();
+        $person->fill($input)->save();
 
-        Alert::info('You have successfully created a province.');
+        Alert::info('You have successfully created a person.');
 
-        return redirect()->route('platform.province.list');
+        return redirect()->route('platform.person.list');
     }
 
     /**
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function remove(Province $province)
+    public function remove(Person $person)
     {
-        $province->delete();
+        $person->delete();
 
-        Alert::info('You have successfully deleted the province.');
+        Alert::info('You have successfully deleted the person.');
 
-        return redirect()->route('platform.province.list');
+        return redirect()->route('platform.person.list');
     }
 }

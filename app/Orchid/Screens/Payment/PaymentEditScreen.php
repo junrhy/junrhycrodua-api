@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Orchid\Screens\Province;
+namespace App\Orchid\Screens\Payment;
 
-use App\Models\Province;
+use App\Models\Payment;
 use Illuminate\Http\Request;
 use Orchid\Screen\Fields\Input;
 use Orchid\Support\Facades\Layout;
@@ -11,24 +11,24 @@ use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Alert;
 use Auth;
 
-class ProvinceEditScreen extends Screen
+class PaymentEditScreen extends Screen
 {
     /**
-     * @var Province
+     * @var Payment
      */
-    public $province;
+    public $payment;
 
     /**
      * Query data.
      *
-     * @param Province $province
+     * @param Payment $payment
      *
      * @return array
      */
-    public function query(Province $province): array
+    public function query(Payment $payment): array
     {
         return [
-            'province' => $province
+            'payment' => $payment
         ];
     }
 
@@ -38,7 +38,7 @@ class ProvinceEditScreen extends Screen
      */
     public function name(): ?string
     {
-        return $this->province->exists ? 'Edit' : 'Create';
+        return $this->payment->exists ? 'Edit' : 'Create';
     }
 
     /**
@@ -46,7 +46,7 @@ class ProvinceEditScreen extends Screen
      */
     public function description(): ?string
     {
-         return $this->province->exists ? 'Edit province details' : 'Add new province';;
+         return $this->payment->exists ? 'Edit payment details' : 'Add new payment';;
     }
 
     /**
@@ -56,18 +56,18 @@ class ProvinceEditScreen extends Screen
      */
     public function commandBar(): array
     {
-        $deletePermission = $this->province->exists && Auth::user()->hasAccess('platform.delete');
+        $deletePermission = $this->payment->exists && Auth::user()->hasAccess('platform.delete');
 
         return [
             Button::make('Save')
                 ->icon('save')
                 ->method('createOrUpdate')
-                ->canSee(!$this->province->exists),
+                ->canSee(!$this->payment->exists),
 
             Button::make('Update')
                 ->icon('note')
                 ->method('createOrUpdate')
-                ->canSee($this->province->exists),
+                ->canSee($this->payment->exists),
 
             Button::make('Remove')
                 ->icon('trash')
@@ -84,11 +84,13 @@ class ProvinceEditScreen extends Screen
      */
     public function layout(): array
     {
+        // $properties = (array) json_decode($this->payment->properties, true);
+
         return [
             Layout::rows([
-                Input::make('province.long_name')
-                    ->title('Name')
-                    ->placeholder('Enter name'),
+                Input::make('payment.amount')
+                    ->title('Amount')
+                    ->placeholder('Enter amount'),
             ])
         ];
     }
@@ -98,28 +100,28 @@ class ProvinceEditScreen extends Screen
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function createOrUpdate(Request $request, Province $province)
+    public function createOrUpdate(Request $request, Payment $payment)
     {
         $input = [
-            'long_name' => $request->province['long_name']
+            'amount' => $request->payment['amount']
         ];
 
-        $province->fill($input)->save();
+        $payment->fill($input)->save();
 
-        Alert::info('You have successfully created a province.');
+        Alert::info('You have successfully created a payment.');
 
-        return redirect()->route('platform.province.list');
+        return redirect()->route('platform.payment.list');
     }
 
     /**
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function remove(Province $province)
+    public function remove(Payment $payment)
     {
-        $province->delete();
+        $payment->delete();
 
-        Alert::info('You have successfully deleted the province.');
+        Alert::info('You have successfully deleted the payment.');
 
-        return redirect()->route('platform.province.list');
+        return redirect()->route('platform.payment.list');
     }
 }

@@ -56,8 +56,7 @@ class BarangayEditScreen extends Screen
      */
     public function commandBar(): array
     {
-        $deletePermission = $this->barangay->exists;
-        $deletePermission = Auth::user()->hasAccess('platform.delete');
+        $deletePermission = $this->barangay->exists && Auth::user()->hasAccess('platform.delete');
 
         return [
             Button::make('Save')

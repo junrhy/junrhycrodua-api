@@ -56,8 +56,7 @@ class StateEditScreen extends Screen
      */
     public function commandBar(): array
     {
-        $deletePermission = $this->state->exists;
-        $deletePermission = Auth::user()->hasAccess('platform.delete');
+        $deletePermission = $this->state->exists && Auth::user()->hasAccess('platform.delete');
 
         return [
             Button::make('Save')

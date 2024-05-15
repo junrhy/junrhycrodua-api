@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Orchid\Screens\Province;
+namespace App\Orchid\Screens\Subscription;
 
-use App\Models\Province;
+use App\Models\Subscription;
 use Illuminate\Http\Request;
 use Orchid\Screen\Fields\Input;
 use Orchid\Support\Facades\Layout;
@@ -11,24 +11,24 @@ use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Alert;
 use Auth;
 
-class ProvinceEditScreen extends Screen
+class SubscriptionEditScreen extends Screen
 {
     /**
-     * @var Province
+     * @var Subscription
      */
-    public $province;
+    public $subscription;
 
     /**
      * Query data.
      *
-     * @param Province $province
+     * @param Subscription $subscription
      *
      * @return array
      */
-    public function query(Province $province): array
+    public function query(Subscription $subscription): array
     {
         return [
-            'province' => $province
+            'subscription' => $subscription
         ];
     }
 
@@ -38,7 +38,7 @@ class ProvinceEditScreen extends Screen
      */
     public function name(): ?string
     {
-        return $this->province->exists ? 'Edit' : 'Create';
+        return $this->subscription->exists ? 'Edit' : 'Create';
     }
 
     /**
@@ -46,7 +46,7 @@ class ProvinceEditScreen extends Screen
      */
     public function description(): ?string
     {
-         return $this->province->exists ? 'Edit province details' : 'Add new province';;
+         return $this->subscription->exists ? 'Edit subscription details' : 'Add new subscription';;
     }
 
     /**
@@ -56,18 +56,18 @@ class ProvinceEditScreen extends Screen
      */
     public function commandBar(): array
     {
-        $deletePermission = $this->province->exists && Auth::user()->hasAccess('platform.delete');
+        $deletePermission = $this->subscription->exists && Auth::user()->hasAccess('platform.delete');
 
         return [
             Button::make('Save')
                 ->icon('save')
                 ->method('createOrUpdate')
-                ->canSee(!$this->province->exists),
+                ->canSee(!$this->subscription->exists),
 
             Button::make('Update')
                 ->icon('note')
                 ->method('createOrUpdate')
-                ->canSee($this->province->exists),
+                ->canSee($this->subscription->exists),
 
             Button::make('Remove')
                 ->icon('trash')
@@ -84,9 +84,11 @@ class ProvinceEditScreen extends Screen
      */
     public function layout(): array
     {
+        // $properties = (array) json_decode($this->subscription->properties, true);
+
         return [
             Layout::rows([
-                Input::make('province.long_name')
+                Input::make('subscription.name')
                     ->title('Name')
                     ->placeholder('Enter name'),
             ])
@@ -98,28 +100,28 @@ class ProvinceEditScreen extends Screen
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function createOrUpdate(Request $request, Province $province)
+    public function createOrUpdate(Request $request, Subscription $subscription)
     {
         $input = [
-            'long_name' => $request->province['long_name']
+            'name' => $request->subscription['name']
         ];
 
-        $province->fill($input)->save();
+        $subscription->fill($input)->save();
 
-        Alert::info('You have successfully created a province.');
+        Alert::info('You have successfully created a subscription.');
 
-        return redirect()->route('platform.province.list');
+        return redirect()->route('platform.subscription.list');
     }
 
     /**
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function remove(Province $province)
+    public function remove(Subscription $subscription)
     {
-        $province->delete();
+        $subscription->delete();
 
-        Alert::info('You have successfully deleted the province.');
+        Alert::info('You have successfully deleted the subscription.');
 
-        return redirect()->route('platform.province.list');
+        return redirect()->route('platform.subscription.list');
     }
 }

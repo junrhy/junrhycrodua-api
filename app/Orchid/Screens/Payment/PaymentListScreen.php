@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Orchid\Screens\Inventory;
+namespace App\Orchid\Screens\Payment;
 
-use App\Orchid\Layouts\Inventory\InventoryListLayout;
-use App\Models\Inventory;
+use App\Orchid\Layouts\Payment\PaymentListLayout;
+use App\Models\Payment;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Screen;
 
-class InventoryListScreen extends Screen
+class PaymentListScreen extends Screen
 {
     /**
      * Query data.
@@ -17,7 +17,7 @@ class InventoryListScreen extends Screen
     public function query(): array
     {
         return [
-            'inventories' => Inventory::filters()->defaultSort('qty', 'asc')->paginate()
+            'payments' => Payment::filters()->defaultSort('amount', 'asc')->paginate()
         ];
     }
 
@@ -26,7 +26,7 @@ class InventoryListScreen extends Screen
      */
     public function name(): ?string
     {
-        return 'Inventory';
+        return 'Payments';
     }
 
     /**
@@ -34,7 +34,7 @@ class InventoryListScreen extends Screen
      */
     public function description(): ?string
     {
-        return "All inventory";
+        return "All payments";
     }
 
     /**
@@ -47,7 +47,7 @@ class InventoryListScreen extends Screen
         return [
             Link::make('Create new')
                 ->icon('pencil')
-                ->route('platform.inventory.edit')
+                ->route('platform.payment.edit')
         ];
     }
 
@@ -59,7 +59,7 @@ class InventoryListScreen extends Screen
     public function layout(): array
     {
         return [
-            InventoryListLayout::class
+            PaymentListLayout::class
         ];
     }
 }

@@ -56,8 +56,7 @@ class OrderEditScreen extends Screen
      */
     public function commandBar(): array
     {
-        $deletePermission = $this->order->exists;
-        $deletePermission = Auth::user()->hasAccess('platform.delete');
+        $deletePermission = $this->order->exists && Auth::user()->hasAccess('platform.delete');
 
         return [
             Button::make('Save')

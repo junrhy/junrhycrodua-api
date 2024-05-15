@@ -56,8 +56,7 @@ class TownEditScreen extends Screen
      */
     public function commandBar(): array
     {
-        $deletePermission = $this->town->exists;
-        $deletePermission = Auth::user()->hasAccess('platform.delete');
+        $deletePermission = $this->town->exists && Auth::user()->hasAccess('platform.delete');
 
         return [
             Button::make('Save')

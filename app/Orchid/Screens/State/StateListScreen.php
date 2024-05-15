@@ -47,7 +47,7 @@ class StateListScreen extends Screen
         return [
             Link::make('Create new')
                 ->icon('pencil')
-                ->route('platform.country.edit')
+                ->route('platform.state.edit')
         ];
     }
 

@@ -56,8 +56,7 @@ class SaleEditScreen extends Screen
      */
     public function commandBar(): array
     {
-        $deletePermission = $this->sale->exists;
-        $deletePermission = Auth::user()->hasAccess('platform.delete');
+        $deletePermission = $this->sale->exists && Auth::user()->hasAccess('platform.delete');
 
         return [
             Button::make('Save')
