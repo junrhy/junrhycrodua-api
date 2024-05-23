@@ -88,6 +88,7 @@ class AnimalEditScreen extends Screen
 
         $image = array_key_exists('image', (array) $properties) ? $properties['image'] : null;
         $pronunciation = array_key_exists('pronunciation', (array) $properties) ? $properties['pronunciation'] : null;
+        $video = array_key_exists('video', (array) $properties) ? $properties['video'] : null;
         $sound = array_key_exists('sound', (array) $properties) ? $properties['sound'] : null;
         $description = array_key_exists('description', (array) $properties) ? $properties['description'] : null;
 
@@ -106,6 +107,11 @@ class AnimalEditScreen extends Screen
                     ->title('Pronunciation')
                     ->placeholder('Enter pronunciation link')
                     ->value($pronunciation),
+
+                Input::make('animal.video')
+                    ->title('Video')
+                    ->placeholder('Enter video link')
+                    ->value($video),
 
                 Input::make('animal.sound')
                     ->title('Sound')
@@ -129,6 +135,7 @@ class AnimalEditScreen extends Screen
     {
         $image = !empty($request->animal['image']) ? $request->animal['image'] : "";
         $pronunciation = !empty($request->animal['pronunciation']) ? $request->animal['pronunciation'] : "";
+        $video = !empty($request->animal['video']) ? $request->animal['video'] : "";
         $sound = !empty($request->animal['sound']) ? $request->animal['sound'] : "";
         $description = !empty($request->animal['description']) ? $request->animal['description'] : "";
 
@@ -137,6 +144,7 @@ class AnimalEditScreen extends Screen
             'properties' => json_encode([
                     'image' => $image,
                     'pronunciation' => $pronunciation,
+                    'video' => $video,
                     'sound' => $sound,
                     'description' => $description
                 ])

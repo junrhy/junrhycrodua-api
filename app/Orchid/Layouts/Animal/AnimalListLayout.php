@@ -53,6 +53,15 @@ class AnimalListLayout extends Table
                     }
                 }),
 
+            TD::make('video', 'Video')
+                ->render(function (Animal $animal) {
+                    $properties = json_decode($animal->properties, true);
+
+                    if (array_key_exists('video', (array) $properties)) {
+                        return Link::make($properties['video'])->href($properties['video'])->target('_BLANK');
+                    }
+                }),
+
             TD::make('sound', 'Sound')
                 ->render(function (Animal $animal) {
                     $properties = json_decode($animal->properties, true);
