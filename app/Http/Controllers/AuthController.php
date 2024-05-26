@@ -15,6 +15,7 @@ class AuthController extends Controller
     public function register(Request $request) {
         $fields = $request->validate([
             'name' => 'required|string',
+            'client_id' => 'required|uuid',
             'brand_id' => 'required|uuid',
             'email' => 'unique:users,email,NULL,id,brand_id,'.$request->brand_id, // unique is brand_id + email_address
             'password' => 'required|string|confirmed',
@@ -23,6 +24,7 @@ class AuthController extends Controller
 
         $user = User::create([
             'name' => $fields['name'],
+            'client_id' => $fields['client_id'],
             'brand_id' => $fields['brand_id'],
             'email' => $fields['email'],
             'password' => bcrypt($fields['password'])
@@ -49,13 +51,16 @@ class AuthController extends Controller
 
     public function login(Request $request) {
         $fields = $request->validate([
+            // 'client_id' => 'required|uuid',
             'brand_id' => 'required|uuid',
             'email' => 'required|string',
             'password' => 'required|string'
         ]);
 
         // Check email
-        $user = User::where('brand_id', $fields['brand_id'])->where('email', $fields['email'])->first();
+        $user = User::where('brand_id', $fields['brand_id'])
+                ->where('email', $fields['email'])
+                ->first();
 
         // Check password
         if(!$user || !Hash::check($fields['password'], $user->password)) {

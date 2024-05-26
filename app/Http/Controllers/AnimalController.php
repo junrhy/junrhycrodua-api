@@ -16,7 +16,7 @@ class AnimalController extends Controller
             $animal = $animal->where('name', 'LIKE', '%' . $request->name . '%');
         }
 
-        $animals = $animal->get();
+        $animals = $animal->orderBy('name', 'asc')->get();
 
         return $this->viewData($animals);
     }

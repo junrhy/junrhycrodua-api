@@ -122,6 +122,8 @@ class AnimalEditScreen extends Screen
                     ->title('Description')
                     ->placeholder('Enter description link')
                     ->value($description),
+
+                Input::make('id')->type('hidden')->value($this->animal->id),
             ])
         ];
     }
@@ -152,9 +154,12 @@ class AnimalEditScreen extends Screen
 
         $animal->fill($input)->save();
 
-        Alert::info('You have successfully created a animal.');
-
-        return redirect()->route('platform.animal.list');
+        if (!empty($request->id)) {
+            Alert::info('You have successfully updated the animal record.');
+        } else {
+            Alert::info('You have successfully added an animal into the record.');
+            return redirect()->route('platform.animal.list');
+        }
     }
 
     /**

@@ -49,7 +49,9 @@ class AnimalListLayout extends Table
                     $properties = json_decode($animal->properties, true);
 
                     if (array_key_exists('pronunciation', (array) $properties)) {
-                        return Link::make($properties['pronunciation'])->href($properties['pronunciation'])->target('_BLANK');
+                        if ($properties['pronunciation']) {
+                            return Link::make('Enabled')->href($properties['pronunciation'])->target('_BLANK');
+                        }
                     }
                 }),
 
@@ -58,7 +60,9 @@ class AnimalListLayout extends Table
                     $properties = json_decode($animal->properties, true);
 
                     if (array_key_exists('video', (array) $properties)) {
-                        return Link::make($properties['video'])->href($properties['video'])->target('_BLANK');
+                        if ($properties['video']) {
+                            return Link::make('Enabled')->href($properties['video'])->target('_BLANK');
+                        }
                     }
                 }),
 
@@ -67,7 +71,9 @@ class AnimalListLayout extends Table
                     $properties = json_decode($animal->properties, true);
 
                     if (array_key_exists('sound', (array) $properties)) {
-                        return Link::make($properties['sound'])->href($properties['sound'])->target('_BLANK');
+                        if ($properties['sound']) {
+                            return Link::make('Enabled')->href($properties['sound'])->target('_BLANK');
+                        }
                     }
                 }),
 
@@ -76,7 +82,9 @@ class AnimalListLayout extends Table
                     $properties = json_decode($animal->properties, true);
 
                     if (array_key_exists('description', (array) $properties)) {
-                        return Link::make($properties['description'])->href($properties['description'])->target('_BLANK');
+                        if ($properties['description']) {
+                            return Link::make('Enabled')->href($properties['description'])->target('_BLANK');
+                        }
                     }
                 }),
 
