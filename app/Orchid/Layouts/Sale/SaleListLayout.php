@@ -14,7 +14,7 @@ class SaleListLayout extends Table
      *
      * @var string
      */
-    protected $target = 'items';
+    protected $target = 'sales';
 
     /**
      * @return TD[]
@@ -22,17 +22,17 @@ class SaleListLayout extends Table
     public function columns(): array
     {
         return [
-            TD::make('name', 'Name')
+            TD::make('amount', 'Amount')
                 ->sort()
-                ->render(function (Sale $item) {
-                    return Link::make($item->name)
-                        ->route('platform.item.edit', $item);
+                ->render(function (Sale $sale) {
+                    return Link::make($sale->amount)
+                        ->route('platform.sale.edit', $sale);
                 }),
 
             TD::make('created_at', 'Added Date')
                 ->sort()
-                ->render(function (Sale $item) {
-                    return date_format($item->created_at, "Y-m-d");
+                ->render(function (Sale $sale) {
+                    return date_format($sale->created_at, "Y-m-d");
                 }),
         ];
     }
