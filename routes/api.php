@@ -25,6 +25,7 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
     Route::post('/logout', [App\Http\Controllers\AuthController::class, 'logout']);
+    Route::post('/sms', [App\Http\Controllers\SMSController::class, 'sendMessage']);
 
     Route::apiResource('addresses', App\Http\Controllers\AddressController::class);
     Route::apiResource('agents', App\Http\Controllers\AgentController::class);
