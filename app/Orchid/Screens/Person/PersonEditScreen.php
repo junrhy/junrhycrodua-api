@@ -3,12 +3,17 @@
 namespace App\Orchid\Screens\Person;
 
 use App\Models\Person;
+use App\Models\Client;
+use App\Models\Brand;
 use Illuminate\Http\Request;
 use Orchid\Screen\Fields\Input;
+use Orchid\Screen\Fields\Select;
+use Orchid\Screen\Fields\DateTimer;
 use Orchid\Support\Facades\Layout;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Alert;
+use Illuminate\Support\Str;
 use Auth;
 
 class PersonEditScreen extends Screen
@@ -84,13 +89,60 @@ class PersonEditScreen extends Screen
      */
     public function layout(): array
     {
-        // $properties = (array) json_decode($this->person->properties, true);
+        $properties = (array) json_decode($this->person->properties, true);
+
+        $clients = Client::pluck('long_name', 'id');
+        $brands = Brand::pluck('long_name', 'id');
+        $type = array_key_exists('type', (array) $properties) ? $properties['type'] : null;
+        $client = array_key_exists('client', (array) $properties) ? $properties['client'] : null;
+        $brand = array_key_exists('brand', (array) $properties) ? $properties['brand'] : null;
 
         return [
             Layout::rows([
+                Select::make('person.type')
+                    ->options([
+                        'customer' => 'Customer',
+                        'member'   => 'Member',
+                        'patient' => 'Patient',
+                        'other' => 'Others'
+                    ])
+                    ->value($type)
+                    ->title('Type'),
+
+                Select::make('person.client')
+                    ->options($clients)
+                    ->value($client)
+                    ->title('Client'),
+
+                Select::make('person.brand')
+                    ->options($brands)
+                    ->value($brand)
+                    ->title('Brand'),
+
                 Input::make('person.first_name')
                     ->title('First Name')
                     ->placeholder('Enter First Name'),
+
+                Input::make('person.middle_name')
+                    ->title('Middle Name')
+                    ->placeholder('Enter Middle Name'),
+
+                Input::make('person.last_name')
+                    ->title('Last Name')
+                    ->placeholder('Enter Last Name'),
+
+                DateTimer::make('person.dob')
+                    ->title('Date Of Birth')
+                    ->format('Y-m-d'),
+
+                Select::make('person.gender')
+                    ->options([
+                        'male'   => 'Male',
+                        'female' => 'Female',
+                    ])
+                    ->title('Gender'),
+
+                Input::make('id')->type('hidden')->value($this->person->id)
             ])
         ];
     }
@@ -102,15 +154,31 @@ class PersonEditScreen extends Screen
      */
     public function createOrUpdate(Request $request, Person $person)
     {
+        $type = !empty($request->person['type']) ? $request->person['type'] : "";
+        $client = !empty($request->person['client']) ? $request->person['client'] : "";
+        $brand = !empty($request->person['brand']) ? $request->person['brand'] : "";
+
         $input = [
-            'amount' => $request->person['amount']
+            'first_name' => Str::headline($request->person['first_name']),
+            'middle_name' => Str::headline($request->person['middle_name']),
+            'last_name' => Str::headline($request->person['last_name']),
+            'dob' => $request->person['dob'],
+            'gender' => $request->person['gender'],
+            'properties' => json_encode([
+                    'type' => $type,
+                    'client_id' => $client,
+                    'brand_id' => $brand
+                ])
         ];
 
         $person->fill($input)->save();
 
-        Alert::info('You have successfully created a person.');
-
-        return redirect()->route('platform.person.list');
+        if (!empty($request->id)) {
+            Alert::info('You have successfully updated the person record.');
+        } else {
+            Alert::info('You have successfully added an person into the record.');
+            return redirect()->route('platform.person.list');
+        }
     }
 
     /**

@@ -3,6 +3,10 @@
 namespace App\Orchid\Screens\Person;
 
 use App\Orchid\Layouts\Person\PersonListLayout;
+use App\Orchid\Layouts\Person\PersonSelection;
+use App\Orchid\Filters\PersonFilter;
+use App\Orchid\Filters\ClientFilter;
+use App\Orchid\Filters\CreatedFilter;
 use App\Models\Person;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Screen;
@@ -17,7 +21,12 @@ class PersonListScreen extends Screen
     public function query(): array
     {
         return [
-            'people' => Person::filters()->defaultSort('amount', 'asc')->paginate()
+            'people' => Person::filters([
+                                PersonFilter::class,
+                                ClientFilter::class,
+                                CreatedFilter::class,
+                            ])
+                            ->defaultSort('last_name', 'asc')->paginate()
         ];
     }
 
@@ -59,6 +68,7 @@ class PersonListScreen extends Screen
     public function layout(): array
     {
         return [
+            PersonSelection::class,
             PersonListLayout::class
         ];
     }
