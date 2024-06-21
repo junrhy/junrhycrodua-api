@@ -10,12 +10,20 @@ use Orchid\Filters\Types\Like;
 use Orchid\Filters\Types\Where;
 use Orchid\Filters\Types\WhereBetween;
 
-class Person extends Model
+use Illuminate\Foundation\Auth\User as Authenticatable;
+
+class Person extends Authenticatable
 {
     use HasFactory, AsSource, Filterable;
 
+    protected $table = 'people';
+
     protected $keyType = 'string';
-    
+
+    protected $hidden = [
+        'account_password', 'remember_token',
+    ];
+
     protected $fillable = [
         'first_name',
         'middle_name',

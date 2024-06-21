@@ -17,7 +17,6 @@ return new class extends Migration
         Schema::create('logins', function (Blueprint $table) {
             $table->uuid('id')->primary()->unique()->default(DB::raw('(UUID())'));
             $table->integer('user_id');
-            $table->uuid('brand_id');
             $table->longText('properties')->nullable();
             $table->timestamps();
         });

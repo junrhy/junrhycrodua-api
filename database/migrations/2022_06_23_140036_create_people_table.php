@@ -22,6 +22,8 @@ return new class extends Migration
             $table->date('dob');
             $table->tinyText('gender');
             $table->longText('properties')->nullable();
+            $table->string('username')->unique()->nullable();
+            $table->string('password')->nullable();
             $table->timestamps();
         });
     }

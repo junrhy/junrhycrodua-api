@@ -12,7 +12,6 @@ class Login extends Model
     protected $keyType = 'string';
     
     protected $fillable = [
-        'user_id',
-        'brand_id'
+        'user_id'
     ];
 }

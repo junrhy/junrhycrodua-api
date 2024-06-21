@@ -40,6 +40,11 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+
+        'account' => [
+            'driver' => 'session',
+            'provider' => 'account',
+        ],
     ],
 
     /*
@@ -69,6 +74,11 @@ return [
         //     'driver' => 'database',
         //     'table' => 'users',
         // ],
+
+        'account' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Person::class,
+        ],
     ],
 
     /*

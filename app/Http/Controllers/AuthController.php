@@ -15,27 +15,21 @@ class AuthController extends Controller
     public function register(Request $request) {
         $fields = $request->validate([
             'name' => 'required|string',
-            'client_id' => 'required|uuid',
-            'brand_id' => 'required|uuid',
-            'email' => 'unique:users,email,NULL,id,brand_id,'.$request->brand_id, // unique is brand_id + email_address
+            'email' => 'unique:users,email,NULL,id',
             'password' => 'required|string|confirmed',
-            'access_type' => 'required|string',
+            'access_type' => 'string',
         ]);
 
         $user = User::create([
             'name' => $fields['name'],
-            'client_id' => $fields['client_id'],
-            'brand_id' => $fields['brand_id'],
             'email' => $fields['email'],
             'password' => bcrypt($fields['password'])
         ]);
 
-        $access = 'access:basic';
+        $access = 'access:client';
         if (!empty($fields['access_type'])) {
             if ($fields['access_type'] == 'admin') {
                 $access = 'access:admin';
-            } elseif ($fields['access_type'] == 'staff') {
-                $access = 'access:staff';
             }
         }
 
@@ -51,15 +45,12 @@ class AuthController extends Controller
 
     public function login(Request $request) {
         $fields = $request->validate([
-            // 'client_id' => 'required|uuid',
-            'brand_id' => 'required|uuid',
             'email' => 'required|string',
             'password' => 'required|string'
         ]);
 
         // Check email
-        $user = User::where('brand_id', $fields['brand_id'])
-                ->where('email', $fields['email'])
+        $user = User::where('email', $fields['email'])
                 ->first();
 
         // Check password
@@ -70,28 +61,23 @@ class AuthController extends Controller
             ], 401);
         }
 
-        $access = 'access:basic';
+        $access = 'access:client';
         if ($request->filled('access_type')) {
             if ($request->access_type == 'admin') {
                 $access = 'access:admin';
-            } elseif ($request->access_type == 'staff') {
-                $access = 'access:staff';
             }
         }
 
         $token = $user->createToken($user->name, [$access])->plainTextToken;
 
         Login::create([
-            'user_id' => $user->id,
-            'brand_id' => $user->brand_id
+            'user_id' => $user->id
         ]);
 
         $response = [
             'id' => $user->id,
             'name' => $user->name,
             'email' => $user->email,
-            'brand_id' => $user->brand_id,
-            'client_id' => $user->client_id,
             'token' => $token,
             'success' => true
         ];
