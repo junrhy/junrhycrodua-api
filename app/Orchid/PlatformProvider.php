@@ -79,6 +79,10 @@ class PlatformProvider extends OrchidServiceProvider
             ->icon('fa.people-arrows')
             ->route('platform.client.list'),
 
+            Menu::make('Brands')
+            ->icon('fa.flag-solid')
+            ->route('platform.brand.list'),
+
             Menu::make('People')
             ->icon('fa.people-group')
             ->route('platform.person.list'),

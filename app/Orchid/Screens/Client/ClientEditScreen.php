@@ -5,6 +5,8 @@ namespace App\Orchid\Screens\Client;
 use App\Models\Client;
 use Illuminate\Http\Request;
 use Orchid\Screen\Fields\Input;
+use Orchid\Screen\Fields\Select;
+use Orchid\Screen\Fields\CheckBox;
 use Orchid\Support\Facades\Layout;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Screen;
@@ -84,13 +86,19 @@ class ClientEditScreen extends Screen
      */
     public function layout(): array
     {
-        // $properties = (array) json_decode($this->client->properties, true);
+        $properties = (array) json_decode($this->client->properties, true);
 
         return [
             Layout::rows([
                 Input::make('client.long_name')
                     ->title('Name')
-                    ->placeholder('Enter name'),
+                    ->placeholder('Enter long name')
+                    ->required(),
+
+                Input::make('client.short_name')
+                    ->title('Name')
+                    ->placeholder('Enter short name')
+                    ->required(),
             ])
         ];
     }
@@ -103,7 +111,9 @@ class ClientEditScreen extends Screen
     public function createOrUpdate(Request $request, Client $client)
     {
         $input = [
-            'amount' => $request->client['amount']
+            'long_name' => $request->client['long_name'],
+            'short_name' => $request->client['short_name'],
+            'properties' => json_encode([])
         ];
 
         $client->fill($input)->save();

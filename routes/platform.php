@@ -47,6 +47,8 @@ use App\Orchid\Screens\Person\PersonEditScreen;
 use App\Orchid\Screens\Person\PersonListScreen;
 use App\Orchid\Screens\Client\ClientEditScreen;
 use App\Orchid\Screens\Client\ClientListScreen;
+use App\Orchid\Screens\Brand\BrandEditScreen;
+use App\Orchid\Screens\Brand\BrandListScreen;
 
 use Illuminate\Support\Facades\Route;
 use Tabuna\Breadcrumbs\Trail;
@@ -383,4 +385,20 @@ Route::screen('clients', ClientListScreen::class)
         return $trail
             ->parent('platform.index')
             ->push('Client');
+    });
+
+Route::screen('brand/{brand?}', BrandEditScreen::class)
+    ->name('platform.brand.edit')
+    ->breadcrumbs(function (Trail $trail){
+        return $trail
+            ->parent('platform.index')
+            ->push('Brand');
+    });
+
+Route::screen('brands', BrandListScreen::class)
+    ->name('platform.brand.list')
+    ->breadcrumbs(function (Trail $trail){
+        return $trail
+            ->parent('platform.index')
+            ->push('Brand');
     });

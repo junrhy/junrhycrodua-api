@@ -112,16 +112,19 @@ class PersonEditScreen extends Screen
                 Select::make('person.client')
                     ->options($clients)
                     ->value($client)
-                    ->title('Client'),
+                    ->title('Client')
+                    ->required(),
 
                 Select::make('person.brand')
                     ->options($brands)
                     ->value($brand)
-                    ->title('Brand'),
+                    ->title('Brand')
+                    ->required(),
 
                 Input::make('person.first_name')
                     ->title('First Name')
-                    ->placeholder('Enter First Name'),
+                    ->placeholder('Enter First Name')
+                    ->required(),
 
                 Input::make('person.middle_name')
                     ->title('Middle Name')
@@ -129,11 +132,13 @@ class PersonEditScreen extends Screen
 
                 Input::make('person.last_name')
                     ->title('Last Name')
-                    ->placeholder('Enter Last Name'),
+                    ->placeholder('Enter Last Name')
+                    ->required(),
 
                 DateTimer::make('person.dob')
                     ->title('Date Of Birth')
-                    ->format('Y-m-d'),
+                    ->format('Y-m-d')
+                    ->required(),
 
                 Select::make('person.gender')
                     ->options([

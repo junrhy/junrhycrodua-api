@@ -6,6 +6,7 @@ use App\Models\Client;
 use Orchid\Screen\Layouts\Table;
 use Orchid\Screen\TD;
 use Orchid\Screen\Actions\Link;
+use Illuminate\Support\Str;
 
 class ClientListLayout extends Table
 {
