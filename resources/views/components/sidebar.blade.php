@@ -48,17 +48,17 @@
 </div>
 <div class="footer">
   <div class="nav-item"><i class="fa fa-user"></i> <a href="/account/profile">Profile</a></div>
-  <div class="nav-item"><i class="fa fa-question"></i> <span id="help">Help</span></div>
+  <div class="nav-item"><i class="fa fa-question"></i> <a href="/account/help">Help</a></div>
   <div class="nav-item">
     <!-- Authentication -->
     <form method="POST" action="{{ route('account.logout') }}">
         @csrf
 
-        <x-responsive-nav-link :href="route('account.logout')"
+        <a :href="route('account.logout')"
                 onclick="event.preventDefault();
                             this.closest('form').submit();">
             <i class="fa fa-arrow-right"></i> {{ __('Log Out') }}
-        </x-responsive-nav-link>
+        </a>
     </form>
   </div>
 </div>

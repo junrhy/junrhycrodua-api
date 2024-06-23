@@ -6,6 +6,7 @@ use App\Http\Controllers\Account\DashboardController;
 use App\Http\Controllers\Account\OrderController;
 use App\Http\Controllers\Account\SaleController;
 use App\Http\Controllers\Account\InventoryController;
+use App\Http\Controllers\Account\HelpController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,6 +41,7 @@ Route::middleware('auth:account')->group(function () {
     Route::get('/account/orders', [OrderController::class, 'index'])->name('account.orders');
     Route::get('/account/sales', [SaleController::class, 'index'])->name('account.sales');
     Route::get('/account/inventory', [InventoryController::class, 'index'])->name('account.inventory');
+    Route::get('/account/help', [HelpController::class, 'index'])->name('account.help');
     
     Route::get('/account/profile', [AccountProfileController::class, 'edit'])->name('account.profile.edit');
     Route::patch('/account/profile', [AccountProfileController::class, 'update'])->name('account.profile.update');
