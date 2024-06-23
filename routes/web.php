@@ -1,9 +1,12 @@
 <?php
 
 use App\Http\Controllers\AccountProfileController;
-use Illuminate\Support\Facades\Route;
-
 use App\Http\Controllers\AccountAuthController;
+use App\Http\Controllers\Account\DashboardController;
+use App\Http\Controllers\Account\OrderController;
+use App\Http\Controllers\Account\SaleController;
+use App\Http\Controllers\Account\InventoryController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,17 +33,20 @@ Route::get('/', function () {
 //     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 // });
 
-require __DIR__.'/auth.php';
-
-Route::get('/account/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth:account'])->name('account.dashboard');
+// require __DIR__.'/auth.php';
 
 Route::middleware('auth:account')->group(function () {
+    Route::get('/account/dashboard', [DashboardController::class, 'index'])->name('account.dashboard');
+    Route::get('/account/orders', [OrderController::class, 'index'])->name('account.orders');
+    Route::get('/account/sales', [SaleController::class, 'index'])->name('account.sales');
+    Route::get('/account/inventory', [InventoryController::class, 'index'])->name('account.inventory');
+    
     Route::get('/account/profile', [AccountProfileController::class, 'edit'])->name('account.profile.edit');
     Route::patch('/account/profile', [AccountProfileController::class, 'update'])->name('account.profile.update');
     Route::delete('/account/profile', [AccountProfileController::class, 'destroy'])->name('account.profile.destroy');
+    Route::put('/account/reset-password', [AccountProfileController::class, 'updatePassword'])->name('account.password.update');
 });
 
 Route::get('/account/login', [AccountAuthController::class, 'showLoginForm'])->name('account.login');
 Route::post('/account/login', [AccountAuthController::class, 'login']);
+Route::post('/account/logout', [AccountAuthController::class, 'logout'])->name('account.logout');

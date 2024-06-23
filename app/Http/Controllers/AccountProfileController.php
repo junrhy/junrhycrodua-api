@@ -7,6 +7,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\View\View;
 
 class AccountProfileController extends Controller
@@ -26,11 +27,7 @@ class AccountProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        $request->user()->fill($request->validated());
-
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
-        }
+        $request->user()->fill($request->only('first_name', 'middle_name', 'last_name'));
 
         $request->user()->save();
 
@@ -56,5 +53,20 @@ class AccountProfileController extends Controller
         $request->session()->regenerateToken();
 
         return Redirect::to('/');
+    }
+
+    /**
+     * Update the user's account password.
+     */
+    public function updatePassword(ProfileUpdateRequest $request): RedirectResponse
+    {
+        $request->validate([
+            'password' => 'required|min:8|confirmed',
+        ]);
+
+        $request->user()->forceFill(['password' =>  Hash::make($request->password)]);
+        $request->user()->save();
+
+        return Redirect::route('account.profile.edit')->with('status', 'password-updated');
     }
 }

@@ -30,4 +30,9 @@ class AccountAuthController extends Controller
 
         return back()->withErrors(['account_id' => 'Invalid credentials'])->onlyInput('account_id');
     }
+
+    public function logout(Request $request) {
+        Auth::logout();
+        return redirect('/account/login');
+    }
 }
