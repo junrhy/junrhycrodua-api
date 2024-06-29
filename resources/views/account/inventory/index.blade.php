@@ -1,7 +1,7 @@
 @push('scripts')
 <script>
 $(document).ready(function(){
-    $('#inventoryTable').DataTable({
+    var table = $('#inventoryTable').DataTable({
         layout: {
             topStart: {
                 buttons: [
@@ -21,7 +21,7 @@ $(document).ready(function(){
                     {
                         text: 'Delete',
                         action: function (e, dt, node, config) {
-                            alert('Delete button activated');
+                            table.row('.selected').remove().draw(false);
                         }
                     },
                 ]
@@ -58,6 +58,16 @@ $(document).ready(function(){
                 });
         }
     });
+
+    $('#inventoryTable tbody').on('click', 'tr', function () {
+        if ($(this).hasClass('selected')) {
+            $(this).removeClass('selected');
+        }
+        else {
+            table.$('tr.selected').removeClass('selected');
+            $(this).addClass('selected');
+        }
+    });
 });
 </script>
 @endpush
@@ -82,13 +92,13 @@ $(document).ready(function(){
                     <tbody>
                         @foreach($inventories as $inventory)
                         <tr>
-                            <td>{{ $inventory->create_at }}</td>
-                            <td>{{ $inventory->item_id }}</td>
+                            <td>{{ $inventory->created_at->format('Y-m-d') }}</td>
+                            <td>{{ $inventory->item->name }}</td>
                             <td>{{ $inventory->qty }}</td>
                             <td>{{ $inventory->unit }}</td>
                             <td>
-                                <i class="fa fa-solid fa-plus"></i> Increase | 
-                                <i class="fa fa-solid fa-minus"></i> Decrease
+                                <i class="fa fa-solid fa-plus text-success"></i> | 
+                                <i class="fa fa-solid fa-minus text-danger"></i>
                             </td>
                         </tr>
                         @endforeach
