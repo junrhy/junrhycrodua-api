@@ -43,10 +43,8 @@ Route::middleware('auth:account')->group(function () {
     
     Route::get('/account/sales', [SaleController::class, 'index'])->name('account.sales');
 
-    Route::get('/account/inventory', [InventoryController::class, 'index'])->name('account.inventory');
-    Route::get('/account/inventory/create', [InventoryController::class, 'create'])->name('account.inventory.create');
-    Route::get('/account/inventory/edit/{id}', [InventoryController::class, 'edit'])->name('account.inventory.edit');
-    Route::delete('/account/inventory/delete', [InventoryController::class, 'destroy'])->name('account.inventory.delete');
+    Route::resource('/account/inventory', InventoryController::class);
+
     Route::get('/account/help', [HelpController::class, 'index'])->name('account.help');
     
     Route::get('/account/profile', [AccountProfileController::class, 'edit'])->name('account.profile.edit');
