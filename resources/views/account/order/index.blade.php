@@ -2,6 +2,44 @@
 <script>
 $(document).ready(function(){
     $('#orderTable').DataTable({
+        layout: {
+            topStart: {
+                buttons: [
+                    'pageLength', 'copyHtml5', 'print',  'excelHtml5', 'csvHtml5', 'pdfHtml5',
+                    {
+                        text: 'New',
+                        action: function (e, dt, node, config) {
+                            location.href = window.location + "/create";
+                        }
+                    },
+                    {
+                        text: 'Edit',
+                        action: function (e, dt, node, config) {
+                            location.href = window.location + "/edit/1";
+                        }
+                    },
+                    {
+                        text: 'Delete',
+                        action: function (e, dt, node, config) {
+                            alert('Delete button activated');
+                        }
+                    },
+                ]
+            }
+        },
+        responsive: {
+            details: {
+                display: DataTable.Responsive.display.modal({
+                    header: function (row) {
+                        var data = row.data();
+                        return 'Details for ' + data[0] + ' ' + data[1];
+                    }
+                }),
+                renderer: DataTable.Responsive.renderer.tableAll({
+                    tableClass: 'table'
+                })
+            }
+        },
         initComplete: function () {
             this.api()
                 .columns([1, 2, 3])

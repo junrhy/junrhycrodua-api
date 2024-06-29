@@ -1,7 +1,45 @@
 @push('scripts')
 <script>
 $(document).ready(function(){
-    $('#orderTable').DataTable({
+    $('#inventoryTable').DataTable({
+        layout: {
+            topStart: {
+                buttons: [
+                    'pageLength', 'copyHtml5', 'print',  'excelHtml5', 'csvHtml5', 'pdfHtml5',
+                    {
+                        text: 'New',
+                        action: function (e, dt, node, config) {
+                            location.href = window.location + "/create";
+                        }
+                    },
+                    {
+                        text: 'Edit',
+                        action: function (e, dt, node, config) {
+                            location.href = window.location + "/edit/1";
+                        }
+                    },
+                    {
+                        text: 'Delete',
+                        action: function (e, dt, node, config) {
+                            alert('Delete button activated');
+                        }
+                    },
+                ]
+            }
+        },
+        responsive: {
+            details: {
+                display: DataTable.Responsive.display.modal({
+                    header: function (row) {
+                        var data = row.data();
+                        return 'Details for ' + data[0] + ' ' + data[1];
+                    }
+                }),
+                renderer: DataTable.Responsive.renderer.tableAll({
+                    tableClass: 'table'
+                })
+            }
+        },
         initComplete: function () {
             this.api()
                 .columns(1)
@@ -30,8 +68,8 @@ $(document).ready(function(){
             <div class="h1">Inventory</div>
         </div>
         <div class="row">
-            <div class="col-md-12 table-responsive">
-                <table id="orderTable" class="table table-striped" style="width:100%">
+            <div class="col-md-12">
+                <table id="inventoryTable" class="table table-striped nowrap" style="width:100%">
                     <thead>
                         <tr>
                             <th>Date</th>
@@ -42,13 +80,18 @@ $(document).ready(function(){
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach($inventories as $inventory)
                         <tr>
-                            <td>2024-12-01</td>
-                            <td>Tiger Nixon</td>
-                            <td>System Architect</td>
-                            <td>Edinburgh</td>
-                            <td>increase | decrease</td>
+                            <td>{{ $inventory->create_at }}</td>
+                            <td>{{ $inventory->item_id }}</td>
+                            <td>{{ $inventory->qty }}</td>
+                            <td>{{ $inventory->unit }}</td>
+                            <td>
+                                <i class="fa fa-solid fa-plus"></i> Increase | 
+                                <i class="fa fa-solid fa-minus"></i> Decrease
+                            </td>
                         </tr>
+                        @endforeach
                     </tbody>
                     <tfoot>
                         <tr>
