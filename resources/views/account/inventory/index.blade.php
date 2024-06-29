@@ -21,7 +21,19 @@ $(document).ready(function(){
                     {
                         text: 'Delete',
                         action: function (e, dt, node, config) {
-                            table.row('.selected').remove().draw(false);
+                            let id = table.row('.selected').id();
+
+                            $.ajax({
+                                type: "DELETE",
+                                url: "/account/inventory/"+id,
+                                data: {
+                                    "_token": "{{ csrf_token() }}",
+                                    'id' : id
+                                },
+                                success: function(result){
+                                    table.row('.selected').remove().draw(false);
+                                }
+                            });
                         }
                     },
                 ]
@@ -91,7 +103,7 @@ $(document).ready(function(){
                     </thead>
                     <tbody>
                         @foreach($inventories as $inventory)
-                        <tr>
+                        <tr id="{{ $inventory->item_id }}">
                             <td>{{ $inventory->created_at->format('Y-m-d') }}</td>
                             <td>{{ $inventory->item->name }}</td>
                             <td>{{ $inventory->qty }}</td>

@@ -38,15 +38,15 @@ class InventoryController extends Controller
         ]);
 
         $item = new Item;
-        $item->user_id = 1;
+        $item->user_id = 1; // to remove
         $item->name = $request->item_name;
         $item->item_code = $request->item_name;
         $item->price = $request->price;
         $item->currency = $request->currency;
         $item->properties = json_encode([
             'person_id' => Auth::guard('account')->user()->id,
-            'client_id' => '',
-            'brand_id' => ''
+            'client_id' => $this->getJsonKey(Auth::guard('account')->user()->properties, 'client_id'),
+            'brand_id' => $this->getJsonKey(Auth::guard('account')->user()->properties, 'brand_id')
         ]);
         $item->save();
 
@@ -62,7 +62,17 @@ class InventoryController extends Controller
 
     public function destroy($id)
     {
-        $inventory = Inventory::find($id);
+        $inventory = Inventory::where('item_id', $id);
         $inventory->forceDelete();
+
+        $item = Item::find($id);
+        $item->forceDelete();
+    }
+
+    private function getJsonKey($json, $key)
+    {
+        $json = json_decode($json, true);
+
+        return $json[$key];
     }
 }
