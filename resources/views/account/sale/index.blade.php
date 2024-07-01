@@ -69,8 +69,8 @@ $(document).ready(function(){
         </div>
         <div class="row">
             <div class="col-md-12 table-responsive">
-                <table id="orderTable" class="table table-striped" style="width:100%">
-                    <thead>
+                <table id="orderTable" class="table table-sm table-striped table-bordered nowrap" style="width:100%;border-bottom: 1px solid #ccc;">
+                    <thead class="table-dark">
                         <tr>
                             <th>Date</th>
                             <th>Order ID</th>

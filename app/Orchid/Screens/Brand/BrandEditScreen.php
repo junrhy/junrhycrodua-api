@@ -118,12 +118,12 @@ class BrandEditScreen extends Screen
                     ->sendTrueOrFalse(),
 
                 Input::make('brand.long_name')
-                    ->title('Name')
+                    ->title('Long Name')
                     ->placeholder('Enter long name')
                     ->required(),
 
                 Input::make('brand.short_name')
-                    ->title('Name')
+                    ->title('Short Name')
                     ->placeholder('Enter short name')
                     ->required(),
             ])

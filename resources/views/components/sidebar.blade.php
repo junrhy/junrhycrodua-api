@@ -1,20 +1,24 @@
 <style type="text/css">
   .logo {
-    height: 10vh;
+    height: 12%;
     font-size: 12pt;
-    font-weight: bolder;
     color: #cccccc;
     padding-top: 15px;
     border-bottom: 1px dashed #cccccc;
   }
 
+  .logo > .account_name {
+    font-weight: bold;
+    color: #ffffff;
+  }
+
   .navs, .footer {
     color: #cccccc;
-    font-size: 16pt;
+    font-size: 12pt;
   }
 
   .footer {
-    margin-top: 150px;
+    margin-top: 100%;
     border-top: 1px dashed #cccccc;
   }
 
@@ -33,9 +37,9 @@
   }
 </style>
 <div class="logo">
-  <div class="">
-    {{ strtoupper(Auth::guard('account')->user()->first_name) }} 
-    {{ strtoupper(Auth::guard('account')->user()->last_name) }}
+  <div class="account_name">
+    {{ ucwords(Auth::guard('account')->user()->first_name) }} 
+    {{ ucwords(Auth::guard('account')->user()->last_name) }}
   </div>
   <div class=""><span>@</span>{{ Auth::guard('account')->user()->username }}</div>
 </div> 

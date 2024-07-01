@@ -15,10 +15,13 @@ class Inventory extends Model
     protected $keyType = 'string';
     
     protected $fillable = [
-        'item_id',
+        'name',
+        'item_code',
+        'currency',
+        'price',
         'qty',
         'unit',
-        'operator'
+        'status'
     ];
 
     /**
@@ -27,12 +30,4 @@ class Inventory extends Model
     protected $allowedSorts = [
         'created_at'
     ];
-
-    /**
-     * Get items
-     */
-    public function item(): BelongsTo
-    {
-        return $this->BelongsTo(Item::class);
-    }
 }

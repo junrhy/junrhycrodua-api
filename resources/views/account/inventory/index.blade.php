@@ -15,7 +15,9 @@ $(document).ready(function(){
                     {
                         text: 'Edit',
                         action: function (e, dt, node, config) {
-                            location.href = window.location + "/edit/1";
+                            let id = table.row('.selected').id();
+
+                            if (id) {location.href = window.location + "/"+id+"/edit";}
                         }
                     },
                     {
@@ -54,7 +56,7 @@ $(document).ready(function(){
         },
         initComplete: function () {
             this.api()
-                .columns(1)
+                .columns(0)
                 .every(function () {
                     var column = this;
                     var title = column.footer().textContent;
@@ -91,37 +93,34 @@ $(document).ready(function(){
         </div>
         <div class="row">
             <div class="col-md-12">
-                <table id="inventoryTable" class="table table-striped nowrap" style="width:100%">
-                    <thead>
+                <table id="inventoryTable" class="table table-sm table-striped table-bordered nowrap" style="width:100%;border-bottom: 1px solid #ccc;">
+                    <thead class="table-dark">
                         <tr>
-                            <th>Date</th>
                             <th>Item</th>
+                            <th>Item Code</th>
+                            <th>Total Value</th>
                             <th>Qty</th>
                             <th>Unit</th>
-                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($inventories as $inventory)
-                        <tr id="{{ $inventory->item_id }}">
-                            <td>{{ $inventory->created_at->format('Y-m-d') }}</td>
-                            <td>{{ $inventory->item->name }}</td>
+                        <tr id="{{ $inventory->id }}">
+                            <td>{{ ucwords($inventory->name) }}</td>
+                            <td>{{ $inventory->item_code }}</td>
+                            <td>{{ $inventory->price }}</td>
                             <td>{{ $inventory->qty }}</td>
-                            <td>{{ $inventory->unit }}</td>
-                            <td>
-                                <i class="fa fa-solid fa-plus text-success"></i> | 
-                                <i class="fa fa-solid fa-minus text-danger"></i>
-                            </td>
+                            <td>{{ ucwords($inventory->unit) }}</td>
                         </tr>
                         @endforeach
                     </tbody>
                     <tfoot>
                         <tr>
-                            <th>Date</th>
                             <th>Item</th>
+                            <th>Item Code</th>
+                            <th>Total Value</th>
                             <th>Qty</th>
                             <th>Unit</th>
-                            <th>Action</th>
                         </tr>
                     </tfoot>
                 </table>

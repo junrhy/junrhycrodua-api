@@ -15,20 +15,13 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
-            AddressSeeder::class,
             AnimalSeeder::class,
             BarangaySeeder::class,
-            BrandSeeder::class,
-            ClientSeeder::class,
             CountrySeeder::class,
-            InventorySeeder::class,
-            ItemSeeder::class,
             PlantSeeder::class,
             ProvinceSeeder::class,
-            RealEstateSeeder::class,
             StateSeeder::class,
-            TownSeeder::class,
-            UserSeeder::class
+            TownSeeder::class
         ]);
     }
 }

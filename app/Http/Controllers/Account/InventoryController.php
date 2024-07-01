@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Inventory;
-use App\Models\Item;
 
 class InventoryController extends Controller
 {
@@ -22,11 +21,6 @@ class InventoryController extends Controller
         return view('account.inventory.create');
     }
 
-    public function edit()
-    {
-        return view('account.inventory.edit');
-    }
-
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -37,35 +31,53 @@ class InventoryController extends Controller
             'unit' => 'required',
         ]);
 
-        $item = new Item;
-        $item->user_id = 1; // to remove
-        $item->name = $request->item_name;
-        $item->item_code = $request->item_name;
-        $item->price = $request->price;
-        $item->currency = $request->currency;
-        $item->properties = json_encode([
+        $inventory = new Inventory;
+        $inventory->name = strtolower($request->item_name);
+        $inventory->item_code = $request->item_name;
+        $inventory->price = $request->price;
+        $inventory->currency = $request->currency;
+        $inventory->qty = $request->qty;
+        $inventory->unit = strtolower($request->unit);
+        $inventory->status = 'IN';
+        $inventory->properties = json_encode([
             'person_id' => Auth::guard('account')->user()->id,
             'client_id' => $this->getJsonKey(Auth::guard('account')->user()->properties, 'client_id'),
             'brand_id' => $this->getJsonKey(Auth::guard('account')->user()->properties, 'brand_id')
         ]);
-        $item->save();
-
-        $inventory = new Inventory;
-        $inventory->item_id = $item->id;
-        $inventory->qty = $request->qty;
-        $inventory->unit = $request->unit;
-        $inventory->operator = 'add';
         $inventory->save();
 
         return back()->withInput();
     }
 
+    public function edit($id)
+    {
+        $inventory = Inventory::find($id);
+
+        return view('account.inventory.edit')->with('inventory', $inventory);
+    }
+
+    public function update($id, Request $request)
+    {
+        $inventory = Inventory::find($id);
+        $inventory->name = strtolower($request->item_name);
+        $inventory->item_code = $request->item_name;
+        $inventory->price = $request->price;
+        $inventory->currency = $request->currency;
+        $inventory->qty = $request->qty;
+        $inventory->unit = strtolower($request->unit);
+        $inventory->save();
+
+        return back();
+    }
+
     public function destroy($id)
     {
-        $inventory = Inventory::where('item_id', $id);
+        $inventory = Inventory::find($id);
+
+        $inventory = Inventory::where('item_id', $inventory->item_id);
         $inventory->forceDelete();
 
-        $item = Item::find($id);
+        $item = Item::find($inventory->item_id);
         $item->forceDelete();
     }
 

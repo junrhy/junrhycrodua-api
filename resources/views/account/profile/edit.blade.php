@@ -1,3 +1,7 @@
+@push('scripts')
+<script src="{{ asset('js/app.js') }}" defer></script>
+<link rel="stylesheet" href="{{ asset('css/app.css') }}">
+@endpush
 <x-account-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
