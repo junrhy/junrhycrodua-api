@@ -5,7 +5,7 @@ $(document).ready(function(){
         layout: {
             topStart: {
                 buttons: [
-                    'pageLength', 'copyHtml5', 'print',  'excelHtml5', 'csvHtml5', 'pdfHtml5',
+                    'pageLength', 
                     {
                         text: 'New',
                         action: function (e, dt, node, config) {
@@ -38,6 +38,13 @@ $(document).ready(function(){
                             });
                         }
                     },
+                    {
+                        extend: 'collection',
+                        text: 'Export',
+                        buttons: [
+                            'print',  'excelHtml5', 'csvHtml5', 'pdfHtml5'
+                        ]
+                    },
                 ]
             }
         },
@@ -57,25 +64,33 @@ $(document).ready(function(){
         rowGroup: {
             startRender: null,
             endRender: function (rows, group) {
-                var totalAmount =
-                    rows
-                        .data()
-                        .pluck(2)
-                        .reduce(function (a, b) {
-                            return +a + +b
-                        });
+                var totalValueIn = 0;
+                var totalValueOut = 0;
+                var totalQtyIn = 0;
+                var totalQtyOut = 0;
 
-                var totalQty =
-                    rows
-                        .data()
-                        .pluck(3)
-                        .reduce(function (a, b) {
-                            return +a + +b
-                        });
-     
-                return $('<tr/>').append('<td class="fw-bold" style="border-top: 1px solid #ccc;border-bottom: 1px dashed #ccc;">Total</td>')
+                rows.data().each(function(item, index, arr){
+                    if (arr[index][5] == "IN") {
+                        totalValueIn = +totalValueIn + +arr[index][2].replace(/\,/g,'');
+                        totalQtyIn = +totalQtyIn + +arr[index][3].replace(/\,/g,'');
+                    } else if (arr[index][5] == "OUT") {
+                        totalValueOut = +totalValueOut + +arr[index][2].replace(/\,/g,'');
+                        totalQtyOut = +totalQtyOut + +arr[index][3].replace(/\,/g,'');
+                    }
+                    
+                });
+
+                var totalAmount = totalValueIn - totalValueOut;
+                var totalQty = totalQtyIn - totalQtyOut;
+
+                const amountFormatter = new Intl.NumberFormat('en-US', {
+                  style: 'currency',
+                  currency: 'PHP'
+                });
+
+                return $('<tr/>').append('<td class="fw-bold bg-light" style="border-top: 1px solid #ccc;border-bottom: 1px dashed #ccc;background:white;">Total</td>')
                     .append('<td class="" style="border-top: 1px solid #ccc;border-bottom: 1px dashed #ccc;"></td>')
-                    .append('<td class="fw-bold"  style="border-top: 1px solid #ccc;border-bottom: 1px dashed #ccc;" align="right">' + totalAmount + '</td>')
+                    .append('<td class="fw-bold"  style="border-top: 1px solid #ccc;border-bottom: 1px dashed #ccc;" align="right">' + amountFormatter.format(totalAmount) + '</td>')
                     .append('<td class="fw-bold"  style="border-top: 1px solid #ccc;border-bottom: 1px dashed #ccc;" align="right">' + totalQty + '</td>')
                     .append('<td class="" style="border-top: 1px solid #ccc;border-bottom: 1px dashed #ccc;"></td>')
                     .append('<td class="" style="border-top: 1px solid #ccc;border-bottom: 1px dashed #ccc;"></td>')
@@ -103,10 +118,9 @@ $(document).ready(function(){
     });
 
     $('#inventoryTable tbody').on('click', 'tr', function () {
-        if ($(this).hasClass('selected')) {
+        if ($(this).hasClass('selected') || $(this).hasClass('selected')) {
             $(this).removeClass('selected');
-        }
-        else {
+        } else {
             table.$('tr.selected').removeClass('selected');
             $(this).addClass('selected');
         }
@@ -139,7 +153,7 @@ $(document).ready(function(){
                         <tr id="{{ $inventory->id }}">
                             <td>{{ ucwords($inventory->name) }}</td>
                             <td>{{ strtoupper($inventory->item_code) }}</td>
-                            <td>{{ $inventory->price }}</td>
+                            <td>{{ number_format($inventory->price * $inventory->qty,2,".",",") }}</td>
                             <td>{{ $inventory->qty }}</td>
                             <td>{{ Illuminate\Support\Str::plural(ucwords($inventory->unit)) }}</td>
                             <td>{{ $inventory->status }}</td>
