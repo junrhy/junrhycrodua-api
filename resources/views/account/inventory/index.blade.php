@@ -91,7 +91,7 @@ $(document).ready(function(){
                 return $('<tr/>').append('<td class="fw-bold bg-light" style="border-top: 1px solid #ccc;border-bottom: 1px dashed #ccc;background:white;">Total</td>')
                     .append('<td class="" style="border-top: 1px solid #ccc;border-bottom: 1px dashed #ccc;"></td>')
                     .append('<td class="fw-bold"  style="border-top: 1px solid #ccc;border-bottom: 1px dashed #ccc;" align="right">' + amountFormatter.format(totalAmount) + '</td>')
-                    .append('<td class="fw-bold"  style="border-top: 1px solid #ccc;border-bottom: 1px dashed #ccc;" align="right">' + totalQty + '</td>')
+                    .append('<td class="fw-bold"  style="border-top: 1px solid #ccc;border-bottom: 1px dashed #ccc;" align="right">' + totalQty.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '</td>')
                     .append('<td class="" style="border-top: 1px solid #ccc;border-bottom: 1px dashed #ccc;"></td>')
                     .append('<td class="" style="border-top: 1px solid #ccc;border-bottom: 1px dashed #ccc;"></td>')
                     .append('<td class="" style="border-top: 1px solid #ccc;border-bottom: 1px dashed #ccc;"></td>');
@@ -154,7 +154,7 @@ $(document).ready(function(){
                             <td>{{ ucwords($inventory->name) }}</td>
                             <td>{{ strtoupper($inventory->item_code) }}</td>
                             <td>{{ number_format($inventory->price * $inventory->qty,2,".",",") }}</td>
-                            <td>{{ $inventory->qty }}</td>
+                            <td>{{ number_format($inventory->qty) }}</td>
                             <td>{{ Illuminate\Support\Str::plural(ucwords($inventory->unit)) }}</td>
                             <td>{{ $inventory->status }}</td>
                             <td>{{ $inventory->created_at->format('Y-m-d') }}</td>
