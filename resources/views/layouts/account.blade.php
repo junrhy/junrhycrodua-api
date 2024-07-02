@@ -40,8 +40,16 @@
   <!-- Customized  -->
   <style type="text/css">
     #sidebar {
-        background: #393c44;
-        min-height: 100vh;
+      background: #393c44;
+      min-height: 100vh;
+    }
+
+    .bt-1-solid {
+      border-top: 1px solid #ccc;
+    }
+
+    .bb-1-dashed {
+      border-bottom: 1px dashed #ccc;
     }
   </style>
 </head>

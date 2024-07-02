@@ -54,6 +54,35 @@ $(document).ready(function(){
                 })
             }
         },
+        rowGroup: {
+            startRender: null,
+            endRender: function (rows, group) {
+                var totalAmount =
+                    rows
+                        .data()
+                        .pluck(2)
+                        .reduce(function (a, b) {
+                            return +a + +b
+                        });
+
+                var totalQty =
+                    rows
+                        .data()
+                        .pluck(3)
+                        .reduce(function (a, b) {
+                            return +a + +b
+                        });
+     
+                return $('<tr/>').append('<td class="fw-bold" style="border-top: 1px solid #ccc;border-bottom: 1px dashed #ccc;">Total</td>')
+                    .append('<td class="" style="border-top: 1px solid #ccc;border-bottom: 1px dashed #ccc;"></td>')
+                    .append('<td class="fw-bold"  style="border-top: 1px solid #ccc;border-bottom: 1px dashed #ccc;" align="right">' + totalAmount + '</td>')
+                    .append('<td class="fw-bold"  style="border-top: 1px solid #ccc;border-bottom: 1px dashed #ccc;" align="right">' + totalQty + '</td>')
+                    .append('<td class="" style="border-top: 1px solid #ccc;border-bottom: 1px dashed #ccc;"></td>')
+                    .append('<td class="" style="border-top: 1px solid #ccc;border-bottom: 1px dashed #ccc;"></td>')
+                    .append('<td class="" style="border-top: 1px solid #ccc;border-bottom: 1px dashed #ccc;"></td>');
+            },
+            dataSrc: 1
+        },
         initComplete: function () {
             this.api()
                 .columns(0)
@@ -93,34 +122,40 @@ $(document).ready(function(){
         </div>
         <div class="row">
             <div class="col-md-12">
-                <table id="inventoryTable" class="table table-sm table-striped table-bordered nowrap" style="width:100%;border-bottom: 1px solid #ccc;">
+                <table id="inventoryTable" class="table table-sm table-bordered nowrap" style="width:100%;">
                     <thead class="table-dark">
                         <tr>
                             <th>Item</th>
                             <th>Item Code</th>
-                            <th>Total Value</th>
+                            <th>Value</th>
                             <th>Qty</th>
                             <th>Unit</th>
+                            <th>Status</th>
+                            <th>Date</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($inventories as $inventory)
                         <tr id="{{ $inventory->id }}">
                             <td>{{ ucwords($inventory->name) }}</td>
-                            <td>{{ $inventory->item_code }}</td>
+                            <td>{{ strtoupper($inventory->item_code) }}</td>
                             <td>{{ $inventory->price }}</td>
                             <td>{{ $inventory->qty }}</td>
-                            <td>{{ ucwords($inventory->unit) }}</td>
+                            <td>{{ Illuminate\Support\Str::plural(ucwords($inventory->unit)) }}</td>
+                            <td>{{ $inventory->status }}</td>
+                            <td>{{ $inventory->created_at->format('Y-m-d') }}</td>
                         </tr>
                         @endforeach
                     </tbody>
                     <tfoot>
                         <tr>
-                            <th>Item</th>
-                            <th>Item Code</th>
-                            <th>Total Value</th>
-                            <th>Qty</th>
-                            <th>Unit</th>
+                            <th style="border-bottom: 1px solid #ccc;">Item</th>
+                            <th style="border-bottom: 1px solid #ccc;">Item Code</th>
+                            <th style="border-bottom: 1px solid #ccc;">Value</th>
+                            <th style="border-bottom: 1px solid #ccc;">Qty</th>
+                            <th style="border-bottom: 1px solid #ccc;">Unit</th>
+                            <th style="border-bottom: 1px solid #ccc;">Status</th>
+                            <th style="border-bottom: 1px solid #ccc;">Date</th>
                         </tr>
                     </tfoot>
                 </table>

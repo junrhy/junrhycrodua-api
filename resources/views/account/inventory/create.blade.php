@@ -24,7 +24,9 @@
 
                     <div class="form-group mt-3">
                         <label for="currency" class="label">Currency</label>
-                        <input type="text" class="form-control @error('currency') is-invalid @enderror" id="currency" name="currency">
+                        <select class="form-control @error('currency') is-invalid @enderror" id="currency" name="currency">
+                            <option value="php">PHP</option>
+                        </select>
                         @error('price')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
@@ -40,7 +42,11 @@
 
                     <div class="form-group mt-3">
                         <label for="unit" class="label">Unit</label>
-                        <input type="text" class="form-control @error('unit') is-invalid @enderror" id="unit" name="unit">
+                        <select class="form-control @error('unit') is-invalid @enderror" id="unit" name="unit">
+                            <option value="piece">Piece</option>
+                            <option value="kilo">Kilo</option>
+                            <option value="sack">Sack</option>
+                        </select>
                         @error('unit')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror

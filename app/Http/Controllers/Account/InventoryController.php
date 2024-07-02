@@ -33,7 +33,7 @@ class InventoryController extends Controller
 
         $inventory = new Inventory;
         $inventory->name = strtolower($request->item_name);
-        $inventory->item_code = $request->item_name;
+        $inventory->item_code = preg_replace('/\s+/', '', strtolower($request->unit . $request->item_name));
         $inventory->price = $request->price;
         $inventory->currency = $request->currency;
         $inventory->qty = $request->qty;
@@ -58,16 +58,24 @@ class InventoryController extends Controller
 
     public function update($id, Request $request)
     {
+        $validated = $request->validate([
+            'item_name' => 'required',
+            'price' => 'required',
+            'currency' => 'required',
+            'qty' => 'required',
+            'unit' => 'required',
+        ]);
+
         $inventory = Inventory::find($id);
         $inventory->name = strtolower($request->item_name);
-        $inventory->item_code = $request->item_name;
+        $inventory->item_code = preg_replace('/\s+/', '', strtolower($request->unit . $request->item_name));
         $inventory->price = $request->price;
         $inventory->currency = $request->currency;
         $inventory->qty = $request->qty;
         $inventory->unit = strtolower($request->unit);
         $inventory->save();
 
-        return back();
+        return back()->withInput();
     }
 
     public function destroy($id)
