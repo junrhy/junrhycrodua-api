@@ -17,12 +17,14 @@ return new class extends Migration
         Schema::create('inventories', function (Blueprint $table) {
             $table->uuid('id')->primary()->unique()->default(DB::raw('(UUID())'));
             $table->string('name');
-            $table->string('item_code');
+            $table->string('item_code')->nullable();
             $table->string('currency');
-            $table->double('price');
+            $table->double('purchase_price')->nullable();
+            $table->double('selling_price')->nullable();
             $table->float('qty');
             $table->string('unit');
             $table->string('status');
+            $table->string('note')->nullable();
             $table->date('expired_at')->nullable();
             $table->longText('properties')->nullable();
             $table->timestamps();

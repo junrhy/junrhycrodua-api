@@ -15,9 +15,25 @@
                     </div>
 
                     <div class="form-group mt-3">
-                        <label for="price" class="label">Price</label>
-                        <input type="text" class="form-control @error('price') is-invalid @enderror" id="price" name="price">
-                        @error('price')
+                        <label for="item_code" class="label">Item Code</label>
+                        <input type="text" class="form-control @error('item_code') is-invalid @enderror" id="item_code" name="item_code">
+                        @error('item_code')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <label for="purchase_price" class="label">Purchase Price</label>
+                        <input type="text" class="form-control @error('purchase_price') is-invalid @enderror" id="purchase_price" name="purchase_price">
+                        @error('purchase_price')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <label for="selling_price" class="label">Selling Price</label>
+                        <input type="text" class="form-control @error('selling_price') is-invalid @enderror" id="selling_price" name="selling_price">
+                        @error('selling_price')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                     </div>
@@ -48,6 +64,25 @@
                             <option value="sack">Sack</option>
                         </select>
                         @error('unit')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <label for="status" class="label">Status</label>
+                        <select class="form-control @error('status') is-invalid @enderror" id="status" name="status">
+                            <option value="IN">IN - Add To Inventory</option>
+                            <option value="OUT">OUT - Remove From Inventory</option>
+                        </select>
+                        @error('status')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <label for="note" class="label">Note</label>
+                        <input type="text" class="form-control @error('note') is-invalid @enderror" id="note" name="note">
+                        @error('note')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                     </div>

@@ -25,20 +25,23 @@ class InventoryController extends Controller
     {
         $validated = $request->validate([
             'item_name' => 'required',
-            'price' => 'required',
+            'purchase_price' => 'required',
             'currency' => 'required',
             'qty' => 'required',
             'unit' => 'required',
+            'status' => 'required',
         ]);
 
         $inventory = new Inventory;
         $inventory->name = strtolower($request->item_name);
-        $inventory->item_code = preg_replace('/\s+/', '', strtolower($request->unit . $request->item_name));
-        $inventory->price = $request->price;
+        $inventory->item_code = preg_replace('/\s+/', '',  $request->item_code);
+        $inventory->purchase_price = $request->purchase_price;
+        $inventory->selling_price = $request->selling_price;
         $inventory->currency = $request->currency;
         $inventory->qty = $request->qty;
         $inventory->unit = strtolower($request->unit);
-        $inventory->status = 'IN';
+        $inventory->status = $request->status;
+        $inventory->note = $request->note;
         $inventory->properties = json_encode([
             'person_id' => Auth::guard('account')->user()->id,
             'client_id' => $this->getJsonKey(Auth::guard('account')->user()->properties, 'client_id'),
@@ -60,19 +63,23 @@ class InventoryController extends Controller
     {
         $validated = $request->validate([
             'item_name' => 'required',
-            'price' => 'required',
+            'purchase_price' => 'required',
             'currency' => 'required',
             'qty' => 'required',
             'unit' => 'required',
+            'status' => 'required',
         ]);
 
         $inventory = Inventory::find($id);
         $inventory->name = strtolower($request->item_name);
-        $inventory->item_code = preg_replace('/\s+/', '', strtolower($request->unit . $request->item_name));
-        $inventory->price = $request->price;
+        $inventory->item_code = preg_replace('/\s+/', '',  $request->item_code);
+        $inventory->purchase_price = $request->purchase_price;
+        $inventory->selling_price = $request->selling_price;
         $inventory->currency = $request->currency;
         $inventory->qty = $request->qty;
         $inventory->unit = strtolower($request->unit);
+        $inventory->status = $request->status;
+        $inventory->note = $request->note;
         $inventory->save();
 
         return back()->withInput();

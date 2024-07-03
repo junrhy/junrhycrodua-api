@@ -18,10 +18,13 @@ class Inventory extends Model
         'name',
         'item_code',
         'currency',
-        'price',
+        'purchase_price',
+        'selling_price',
         'qty',
         'unit',
-        'status'
+        'status',
+        'note',
+        'expired_at'
     ];
 
     /**
