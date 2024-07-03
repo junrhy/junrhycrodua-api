@@ -86,7 +86,8 @@ $(document).ready(function(){
                                     'id' : id
                                 },
                                 success: function(result){
-                                    table.row('.selected').remove().draw(false);
+                                    // table.row('.selected').remove().draw(false);
+                                    location.reload();
                                 }
                             });
                         }

@@ -10,7 +10,13 @@ use App\Models\Inventory;
 class InventoryController extends Controller
 {
     public function index() {
-        $inventories = Inventory::all();
+        $userProperties = json_decode(Auth::guard('account')->user()->properties);
+        $userId = Auth::guard('account')->user()->id;
+
+        $inventories = Inventory::whereJsonContains('properties', ['client_id' => $userProperties->client_id])
+                                ->whereJsonContains('properties', ['brand_id'  => $userProperties->brand_id])
+                                ->whereJsonContains('properties', ['person_id' => $userId])
+                                ->get();
 
         return view('account.inventory.index')
                 ->with('inventories', $inventories);
@@ -25,13 +31,20 @@ class InventoryController extends Controller
     {
         $validated = $request->validate([
             'item_name' => 'required',
-            'purchase_price' => 'required',
             'currency' => 'required',
             'qty' => 'required',
             'unit' => 'required',
             'status' => 'required',
         ]);
 
+        $accountType = json_decode(Auth::guard('account')->user()->properties)->type;
+
+        if ($accountType == 'staff') {
+            $personId = json_decode(Auth::guard('account')->user()->properties)->person_id;
+        } else {
+            $personId = Auth::guard('account')->user()->id;
+        }
+        
         $inventory = new Inventory;
         $inventory->name = strtolower($request->item_name);
         $inventory->item_code = preg_replace('/\s+/', '',  $request->item_code);
@@ -43,13 +56,13 @@ class InventoryController extends Controller
         $inventory->status = $request->status;
         $inventory->note = $request->note;
         $inventory->properties = json_encode([
-            'person_id' => Auth::guard('account')->user()->id,
-            'client_id' => $this->getJsonKey(Auth::guard('account')->user()->properties, 'client_id'),
-            'brand_id' => $this->getJsonKey(Auth::guard('account')->user()->properties, 'brand_id')
+            'person_id' => $personId,
+            'client_id' => json_decode(Auth::guard('account')->user()->properties)->client_id,
+            'brand_id' => json_decode(Auth::guard('account')->user()->properties)->brand_id
         ]);
         $inventory->save();
 
-        return back()->withInput();
+        return back()->with('status', 'Successfully added!');
     }
 
     public function edit($id)
@@ -63,7 +76,6 @@ class InventoryController extends Controller
     {
         $validated = $request->validate([
             'item_name' => 'required',
-            'purchase_price' => 'required',
             'currency' => 'required',
             'qty' => 'required',
             'unit' => 'required',
@@ -82,24 +94,12 @@ class InventoryController extends Controller
         $inventory->note = $request->note;
         $inventory->save();
 
-        return back()->withInput();
+        return back()->with('status', 'Successfully updated!');
     }
 
     public function destroy($id)
     {
         $inventory = Inventory::find($id);
-
-        $inventory = Inventory::where('item_id', $inventory->item_id);
         $inventory->forceDelete();
-
-        $item = Item::find($inventory->item_id);
-        $item->forceDelete();
-    }
-
-    private function getJsonKey($json, $key)
-    {
-        $json = json_decode($json, true);
-
-        return $json[$key];
     }
 }

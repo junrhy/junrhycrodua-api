@@ -5,6 +5,11 @@
         </div>
         <div class="row">
             <div class="col-md-4">
+                @if(session('status'))
+                    <div class="alert alert-success">
+                        {{ session('status') }}
+                    </div>
+                @endif
                 <form action="{{ route('inventory.store') }}" method="POST">
                     <div class="form-group">
                         <label for="item_name" class="label">Name</label>
