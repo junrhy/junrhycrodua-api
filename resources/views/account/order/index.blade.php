@@ -1,28 +1,54 @@
 @push('scripts')
 <script>
 $(document).ready(function(){
-    $('#orderTable').DataTable({
+    const amountFormatter = new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'PHP'
+    });
+
+    var table = $('#orderTable').DataTable({
         layout: {
             topStart: {
                 buttons: [
-                    'pageLength', 'copyHtml5', 'print',  'excelHtml5', 'csvHtml5', 'pdfHtml5',
+                    'pageLength', 
                     {
                         text: 'New',
                         action: function (e, dt, node, config) {
-                            location.href = window.location + "/create";
+                            location.href = window.location.origin + "/account/order/create";
                         }
                     },
                     {
                         text: 'Edit',
                         action: function (e, dt, node, config) {
-                            location.href = window.location + "/edit/1";
+                            let id = table.row('.selected').id();
+
+                            if (id) {location.href = window.location.origin + "/account/order/"+id+"/edit";}
                         }
                     },
                     {
                         text: 'Delete',
                         action: function (e, dt, node, config) {
-                            alert('Delete button activated');
+                            let id = table.row('.selected').id();
+
+                            $.ajax({
+                                type: "DELETE",
+                                url: "/account/order/"+id,
+                                data: {
+                                    "_token": "{{ csrf_token() }}",
+                                    'id' : id
+                                },
+                                success: function(result){
+                                    table.row('.selected').remove().draw(false);
+                                }
+                            });
                         }
+                    },
+                    {
+                        extend: 'collection',
+                        text: 'Export',
+                        buttons: [
+                            'print',  'excelHtml5', 'csvHtml5', 'pdfHtml5'
+                        ]
                     },
                 ]
             }
@@ -42,7 +68,7 @@ $(document).ready(function(){
         },
         initComplete: function () {
             this.api()
-                .columns([1, 2, 3])
+                .columns([0])
                 .every(function () {
                     var column = this;
                     var title = column.footer().textContent;
@@ -58,6 +84,15 @@ $(document).ready(function(){
                 });
         }
     });
+
+    $('#orderTable tbody').on('click', 'tr', function () {
+        if ($(this).hasClass('selected') || $(this).hasClass('dtrg-group')) {
+            $(this).removeClass('selected');
+        } else {
+            table.$('tr.selected').removeClass('selected');
+            $(this).addClass('selected');
+        }
+    });
 });
 </script>
 @endpush
@@ -69,32 +104,43 @@ $(document).ready(function(){
         </div>
         <div class="row">
             <div class="col-md-12 table-responsive">
-                <table id="orderTable" class="table table-sm table-striped table-bordered nowrap" style="width:100%;border-bottom: 1px solid #ccc;">
+                <table id="orderTable" class="table table-sm table-striped table-bordered nowrap" style="width:100%;">
                     <thead class="table-dark">
                         <tr>
-                            <th>Date</th>
-                            <th>Name</th>
-                            <th>Source</th>
-                            <th>Type</th>
+                            <th>Item</th>
+                            <th>Qty</th>
+                            <th>Unit</th>
+                            <th>Price</th>
                             <th>Status</th>
+                            <th>Type</th>
+                            <th>Source</th>
+                            <th>Date</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>2024-12-01</td>
-                            <td>Tiger Nixon</td>
-                            <td>System Architect</td>
-                            <td>Pick Up, Deliver, Dine In, Take Out</td>
-                            <td>Edinburgh</td>
+                        @foreach($orders as $order)
+                        <tr id="{{ $order->id }}">
+                            <td>{{ ucwords($order->name) }}</td>
+                            <td>{{ ucwords(json_decode($order->properties)->qty) }}</td>
+                            <td>{{ ucwords(json_decode($order->properties)->unit) }}</td>
+                            <td>{{ ucwords(json_decode($order->properties)->price) }}</td>
+                            <td>{{ ucwords($order->status) }}</td>
+                            <td>{{ ucwords($order->type) }}</td>
+                            <td>{{ ucwords($order->source) }}</td>
+                            <td>{{ $order->created_at->format('Y-m-d') }}</td>
                         </tr>
+                        @endforeach
                     </tbody>
                     <tfoot>
                         <tr>
-                            <th>Date</th>
-                            <th>Name</th>
-                            <th>Source</th>
-                            <th>Type</th>
-                            <th>Status</th>
+                            <th style="border-bottom: 1px solid #ccc;">Item</th>
+                            <th style="border-bottom: 1px solid #ccc;">Qty</th>
+                            <th style="border-bottom: 1px solid #ccc;">Unit</th>
+                            <th style="border-bottom: 1px solid #ccc;">Price</th>
+                            <th style="border-bottom: 1px solid #ccc;">Status</th>
+                            <th style="border-bottom: 1px solid #ccc;">Type</th>
+                            <th style="border-bottom: 1px solid #ccc;">Source</th>
+                            <th style="border-bottom: 1px solid #ccc;">Date</th>
                         </tr>
                     </tfoot>
                 </table>

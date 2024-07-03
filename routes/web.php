@@ -39,7 +39,7 @@ Route::get('/', function () {
 Route::middleware('auth:account')->group(function () {
     Route::get('/account/dashboard', [DashboardController::class, 'index'])->name('account.dashboard');
     
-    Route::get('/account/orders', [OrderController::class, 'index'])->name('account.orders');
+    Route::resource('/account/order', OrderController::class);
     
     Route::get('/account/sales', [SaleController::class, 'index'])->name('account.sales');
 
