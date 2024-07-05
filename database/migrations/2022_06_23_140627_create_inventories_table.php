@@ -18,6 +18,7 @@ return new class extends Migration
             $table->uuid('id')->primary()->unique()->default(DB::raw('(UUID())'));
             $table->string('name');
             $table->string('item_code')->nullable();
+            $table->string('location')->nullable();
             $table->string('currency');
             $table->double('purchase_price')->nullable();
             $table->double('selling_price')->nullable();

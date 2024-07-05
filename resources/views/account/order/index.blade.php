@@ -50,6 +50,26 @@ $(document).ready(function(){
                             'print',  'excelHtml5', 'csvHtml5', 'pdfHtml5'
                         ]
                     },
+                    {
+                        extend: 'collection',
+                        text: 'Options',
+                        buttons: [
+                            {
+                                text: 'Show Completed',
+                                attr: {id: 'showCompletedButton' },
+                                action: function (e, dt, node, config) {
+                                    $(".completed").toggleClass('d-none');
+
+                                    if ($("#showCompletedButton").text() == "Hide Completed") {
+                                        $("#showCompletedButton").text("Show Completed");
+                                        return;
+                                    }
+                                    
+                                    $("#showCompletedButton").text("Hide Completed");
+                                }
+                            },
+                        ]
+                    },
                 ]
             }
         },
@@ -82,6 +102,11 @@ $(document).ready(function(){
                             }
                         });
                 });
+        },
+        rowCallback: function( row, data, index ) {
+            if (data[4] == 'Completed') {
+                $(row).addClass('completed d-none');
+            }
         }
     });
 

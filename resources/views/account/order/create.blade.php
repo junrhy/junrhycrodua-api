@@ -50,9 +50,13 @@
                     <div class="form-group mt-3">
                         <label for="status" class="label">Status</label>
                         <select class="form-control @error('status') is-invalid @enderror" id="status" name="status">
+                            <option value="to_prepare">To Prepare</option>
+                            <option value="prepared">Prepared</option>
+                            <option value="cancelled">Cancelled</option>
+                            <option value="shipped">Shipped</option>
                             <option value="served">Served</option>
                             <option value="delivered">Delivered</option>
-                            <option value="cancelled">Cancelled</option>
+                            <option value="completed">Completed</option>
                         </select>
                         @error('status')
                             <div class="alert alert-danger">{{ $message }}</div>

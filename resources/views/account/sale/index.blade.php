@@ -5,25 +5,46 @@ $(document).ready(function(){
         layout: {
             topStart: {
                 buttons: [
-                    'pageLength', 'copyHtml5', 'print',  'excelHtml5', 'csvHtml5', 'pdfHtml5',
+                    'pageLength', 
                     {
                         text: 'New',
                         action: function (e, dt, node, config) {
-                            location.href = window.location + "/create";
+                            location.href = window.location.origin + "/account/sale/create";
                         }
                     },
                     {
                         text: 'Edit',
                         action: function (e, dt, node, config) {
-                            location.href = window.location + "/edit/1";
+                            let id = table.row('.selected').id();
+
+                            if (id) {location.href = window.location.origin + "/account/sale/"+id+"/edit";}
                         }
                     },
                     {
                         text: 'Delete',
                         action: function (e, dt, node, config) {
-                            alert('Delete button activated');
+                            let id = table.row('.selected').id();
+
+                            $.ajax({
+                                type: "DELETE",
+                                url: "/account/sale/"+id,
+                                data: {
+                                    "_token": "{{ csrf_token() }}",
+                                    'id' : id
+                                },
+                                success: function(result){
+                                    table.row('.selected').remove().draw(false);
+                                }
+                            });
                         }
                     },
+                    {
+                        extend: 'collection',
+                        text: 'Export',
+                        buttons: [
+                            'print',  'excelHtml5', 'csvHtml5', 'pdfHtml5'
+                        ]
+                    }
                 ]
             }
         },
@@ -42,7 +63,7 @@ $(document).ready(function(){
         },
         initComplete: function () {
             this.api()
-                .columns([1,2])
+                .columns([0, 7])
                 .every(function () {
                     var column = this;
                     var title = column.footer().textContent;
@@ -72,29 +93,46 @@ $(document).ready(function(){
                 <table id="orderTable" class="table table-sm table-striped table-bordered nowrap" style="width:100%;border-bottom: 1px solid #ccc;">
                     <thead class="table-dark">
                         <tr>
-                            <th>Date</th>
-                            <th>Order ID</th>
-                            <th>Item</th>
+                            <th>Source</th>
+                            <th>Items</th>
                             <th>Amount</th>
+                            <th>Discount</th>
+                            <th>Fees</th>
+                            <th>Tax</th>
+                            <th>Payment Type</th>
+                            <th>Payment Tracking #</th>
                             <th>Status</th>
+                            <th>Date</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>2024-12-01</td>
-                            <td>OR-3434</td>
-                            <td>Tiger Nixon</td>
-                            <td>System Architect</td>
-                            <td>Edinburgh</td>
+                        @foreach($sales as $sale)
+                        <tr id="{{ $sale->id }}">
+                            <td>{{ $sale->id }}</td>
+                            <td>{{ $sale->id }}</td>
+                            <td>{{ $sale->id }}</td>
+                            <td>{{ $sale->id }}</td>
+                            <td>{{ $sale->id }}</td>
+                            <td>{{ $sale->id }}</td>
+                            <td>{{ $sale->id }}</td>
+                            <td>{{ $sale->id }}</td>
+                            <td>{{ $sale->id }}</td>
+                            <td>{{ $sale->created_at->format('Y-m-d') }}</td>
                         </tr>
+                        @endforeach
                     </tbody>
                     <tfoot>
                         <tr>
-                            <th>Date</th>
-                            <th>Order ID</th>
-                            <th>Item</th>
+                            <th>Source</th>
+                            <th>Items</th>
                             <th>Amount</th>
+                            <th>Discount</th>
+                            <th>Fees</th>
+                            <th>Tax</th>
+                            <th>Payment Type</th>
+                            <th>Tracking #</th>
                             <th>Status</th>
+                            <th>Date</th>
                         </tr>
                     </tfoot>
                 </table>

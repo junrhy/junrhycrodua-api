@@ -16,8 +16,15 @@ return new class extends Migration
         DB::statement('SET SESSION sql_require_primary_key=0');
         Schema::create('sales', function (Blueprint $table) {
             $table->uuid('id')->primary()->unique()->default(DB::raw('(UUID())'));
-            $table->uuid('item_id');
+            $table->string('source');
+            $table->string('items');
             $table->double('amount');
+            $table->double('discount')->nullable();
+            $table->double('fees')->nullable();
+            $table->double('tax')->nullable();
+            $table->string('payment_type')->nullable();
+            $table->string('payment_tracking_code')->nullable();
+            $table->string('status');
             $table->longText('properties')->nullable();
             $table->timestamps();
         });

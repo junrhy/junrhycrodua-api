@@ -1,3 +1,12 @@
+@push('scripts')
+<script type="text/javascript">
+setTimeout(function(){ 
+    document.getElementById("unit").value = "{{ json_decode($order->properties)->unit }}",
+    document.getElementById("type").value = "{{ $order->type }}",
+    document.getElementById("status").value = "{{ $order->status }}"
+}, 1);
+</script>
+@endpush
 <x-account-layout>
     <div class="container-fluid">
         <div class="row">
@@ -50,9 +59,13 @@
                     <div class="form-group mt-3">
                         <label for="status" class="label">Status</label>
                         <select class="form-control @error('status') is-invalid @enderror" id="status" name="status">
+                            <option value="to_prepare">To Prepare</option>
+                            <option value="prepared">Prepared</option>
+                            <option value="cancelled">Cancelled</option>
+                            <option value="shipped">Shipped</option>
                             <option value="served">Served</option>
                             <option value="delivered">Delivered</option>
-                            <option value="cancelled">Cancelled</option>
+                            <option value="completed">Completed</option>
                         </select>
                         @error('status')
                             <div class="alert alert-danger">{{ $message }}</div>
