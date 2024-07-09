@@ -6,6 +6,7 @@ use App\Http\Controllers\Account\DashboardController;
 use App\Http\Controllers\Account\OrderController;
 use App\Http\Controllers\Account\SaleController;
 use App\Http\Controllers\Account\InventoryController;
+use App\Http\Controllers\Account\LogisticController;
 use App\Http\Controllers\Account\HelpController;
 use Illuminate\Support\Facades\Route;
 
@@ -42,6 +43,7 @@ Route::middleware('auth:account')->group(function () {
     Route::resource('/account/order', OrderController::class);
     Route::resource('/account/sale', SaleController::class);
     Route::resource('/account/inventory', InventoryController::class);
+    Route::resource('/account/logistic', LogisticController::class);
 
     Route::get('/account/help', [HelpController::class, 'index'])->name('account.help');
     

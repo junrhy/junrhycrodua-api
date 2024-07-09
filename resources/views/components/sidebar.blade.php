@@ -18,7 +18,7 @@
   }
 
   .footer {
-    margin-top: 50%;
+    margin-top: 20%;
     border-top: 1px dashed #cccccc;
   }
 
@@ -51,9 +51,11 @@
   <div class="nav-item"><i class="fa fa-file"></i> <a href="/account/order">Orders</a></div>
   <div class="nav-item"><i class="fa fa-cash-register"></i> <a href="/account/sale">Sales</a></div>
   <div class="nav-item"><i class="fa fa-box"></i> <a href="/account/inventory">Inventory</a></div>
-  <div class="nav-item"><i class="fa fa-truck"></i> <a href="">Logistics</a></div>
+  <div class="nav-item"><i class="fa fa-truck"></i> <a href="/account/logistic">Logistics</a></div>
   <div class="nav-item"><i class="fa fa-money"></i> <a href="">Lending</a></div>
-  <div class="nav-item"><i class="fa fa-users"></i> <a href="/account/staff">Staff</a></div>
+  <div class="nav-item"><i class="fa fa-building"></i> <a href="">Rental</a></div>
+  <div class="nav-item"><i class="fa fa-users"></i> <a href="">Membership</a></div>
+  <div class="nav-item"><i class="fa fa-clock"></i> <a href="">Schedules</a></div>
 </div>
 <div class="footer">
   <div class="nav-item"><i class="fa fa-user"></i> <a href="/account/profile">Profile</a></div>
