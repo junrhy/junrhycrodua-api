@@ -3,10 +3,16 @@
 use App\Http\Controllers\AccountProfileController;
 use App\Http\Controllers\AccountAuthController;
 use App\Http\Controllers\Account\DashboardController;
+use App\Http\Controllers\Account\ProductController;
+use App\Http\Controllers\Account\ServiceController;
 use App\Http\Controllers\Account\OrderController;
 use App\Http\Controllers\Account\SaleController;
 use App\Http\Controllers\Account\InventoryController;
 use App\Http\Controllers\Account\LogisticController;
+use App\Http\Controllers\Account\LendingController;
+use App\Http\Controllers\Account\RentalController;
+use App\Http\Controllers\Account\MembershipController;
+use App\Http\Controllers\Account\ScheduleController;
 use App\Http\Controllers\Account\HelpController;
 use Illuminate\Support\Facades\Route;
 
@@ -40,10 +46,16 @@ Route::get('/', function () {
 Route::middleware('auth:account')->group(function () {
     Route::get('/account/dashboard', [DashboardController::class, 'index'])->name('account.dashboard');
     
+    Route::resource('/account/product', ProductController::class);
+    Route::resource('/account/service', ServiceController::class);
     Route::resource('/account/order', OrderController::class);
     Route::resource('/account/sale', SaleController::class);
     Route::resource('/account/inventory', InventoryController::class);
     Route::resource('/account/logistic', LogisticController::class);
+    Route::resource('/account/lending', LendingController::class);
+    Route::resource('/account/rental', RentalController::class);
+    Route::resource('/account/membership', MembershipController::class);
+    Route::resource('/account/schedule', ScheduleController::class);
 
     Route::get('/account/help', [HelpController::class, 'index'])->name('account.help');
     

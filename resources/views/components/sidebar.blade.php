@@ -46,16 +46,16 @@
 <div class="navs">
   <div class="nav-item"><i class="fa fa-chart-line"></i> <a href="/account/dashboard">Dashboard</a></div>
 
-  <div class="nav-item"><i class="fa fa-list"></i> <a href="">Products</a></div>
-  <div class="nav-item"><i class="fa fa-list"></i> <a href="">Services</a></div>
+  <div class="nav-item"><i class="fa fa-list"></i> <a href="/account/product">Products</a></div>
+  <div class="nav-item"><i class="fa fa-cut"></i> <a href="/account/service">Services</a></div>
   <div class="nav-item"><i class="fa fa-file"></i> <a href="/account/order">Orders</a></div>
   <div class="nav-item"><i class="fa fa-cash-register"></i> <a href="/account/sale">Sales</a></div>
   <div class="nav-item"><i class="fa fa-box"></i> <a href="/account/inventory">Inventory</a></div>
   <div class="nav-item"><i class="fa fa-truck"></i> <a href="/account/logistic">Logistics</a></div>
-  <div class="nav-item"><i class="fa fa-money"></i> <a href="">Lending</a></div>
-  <div class="nav-item"><i class="fa fa-building"></i> <a href="">Rental</a></div>
-  <div class="nav-item"><i class="fa fa-users"></i> <a href="">Membership</a></div>
-  <div class="nav-item"><i class="fa fa-clock"></i> <a href="">Schedules</a></div>
+  <div class="nav-item"><i class="fa fa-money"></i> <a href="/account/lending">Lending</a></div>
+  <div class="nav-item"><i class="fa fa-building"></i> <a href="/account/rental">Rental</a></div>
+  <div class="nav-item"><i class="fa fa-users"></i> <a href="/account/membership">Membership</a></div>
+  <div class="nav-item"><i class="fa fa-clock"></i> <a href="/account/schedule">Schedules</a></div>
 </div>
 <div class="footer">
   <div class="nav-item"><i class="fa fa-user"></i> <a href="/account/profile">Profile</a></div>

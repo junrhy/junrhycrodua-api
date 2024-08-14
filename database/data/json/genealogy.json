@@ -1,0 +1,22 @@
+{
+  "id":"HkqEDLvxE",
+  "first_name":"John",
+  "last_name":"Doe",
+  "gender":"male",
+  "dob":"1986-11-03",
+  "parents":[
+    {"id":"011jVS4rb","type":"blood","gender":"male"},
+    {"id":"PXACjDxmR","type":"blood","gender":"female"}
+  ],
+  "siblings":[
+    {"id":"kuVISwh7w","type":"blood","gender":"female"},
+    {"id":"UIEjvLJMd","type":"blood","gender":"female"},
+    {"id":"ZVi8fWDBx","type":"blood","gender":"female"}
+  ],
+  "spouses":[
+    
+  ],
+  "children":[
+    
+  ]
+}
