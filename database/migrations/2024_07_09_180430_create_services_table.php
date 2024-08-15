@@ -14,7 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::create('services', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary()->unique()->default(DB::raw('(UUID())'));
+            $table->string('name');
+            $table->string('category')->nullable();
+            $table->longText('properties')->nullable();
             $table->timestamps();
         });
     }
